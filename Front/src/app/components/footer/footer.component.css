@@ -1,0 +1,23 @@
+footer {
+    background-color: #83C5BE;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #63918A;
+    padding:2%;
+    margin: 0;
+}
+
+footer img {
+    width: 30px;
+    height: 30px;
+    margin-left:20px
+}
+
+footer p {
+    margin:0;
+    padding:0;
+}

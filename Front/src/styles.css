@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #83C5BE;
+    background-image: url('assets/pictures/background.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-height: 100%;
+ }
