@@ -1,0 +1,37 @@
+#main-container {
+    width: 100%;
+}
+
+form {
+    margin:5%;
+}
+h2 {
+    color : white;
+    margin-bottom:10%;
+}
+
+button[type="submit"] {
+    background-color: white;
+    border : none;
+    border-radius: 5px;
+    padding:5px 10px 5px 10px;
+    transition-duration: 3s
+}
+
+button[type="submit"]:hover {
+    zoom: 1.1;
+}
+
+.fa-search {
+    margin-right:10px;
+}
+
+.mat-stepper-horizontal {
+    background-color: transparent;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-icon {
+    background-color: white;
+    color:black;
+ }
+
