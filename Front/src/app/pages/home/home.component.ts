@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  cities: string[] = ["Brussel", "Brugge"]; // List of cities based on partial search string
+  cities: string[] = []; // List of cities based on partial search string
   selectedCity = null;
   control = new FormControl();
 

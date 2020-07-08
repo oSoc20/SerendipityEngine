@@ -8,15 +8,6 @@
         
         <button type="submit"><i class="fa fa-search"></i>Search</button>
     </form>
-    
-    <mat-form-field [formGroup]="cityFormGroup">
-      <input placeholder="I think Brussels is a good choice... " type="text" matInput [matAutocomplete]="auto" [formControl]="myControl" ng-change="search()" formControlName="cityFormControl"/>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let city of cities | async" [value]="selectedCity">
-          {{city}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
 -->
     <form class="example-form">
       <input type="text"
@@ -47,27 +38,3 @@
 </div>
 
 <app-footer ng-init="size()"></app-footer>
-
-
-<!--
-<div class="row">
-  <div id="map"></div>
-</div>
-
-
-<h1>Hello world!</h1>
-
-<div class="search-box">
-  <form class="example-form">
-    <input type="text"
-          placeholder="Search for a city"
-          [formControl]="control"
-          [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let city of cities | async" [value]="city">
-        {{city}}
-      </mat-option>
-    </mat-autocomplete>
-  </form>
-</div>
--->
