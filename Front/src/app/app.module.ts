@@ -38,7 +38,7 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
     MatAutocompleteModule,
     MatInputModule,
     MatSelectModule

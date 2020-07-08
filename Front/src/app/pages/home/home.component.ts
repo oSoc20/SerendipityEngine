@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
     // this.form = this.formBuilder.group({
     //   city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
     // });
-  constructor(private formBuilder: FormBuilder) {
 
     this.form = this.formBuilder.group({
       city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
