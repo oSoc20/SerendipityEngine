@@ -4,8 +4,18 @@
     <form [formGroup]="form" (ngSubmit)="searching()">
         <h2 class="text-center">Where do you want to go to ?</h2>
         <input placeholder="I think Brussels is a good choice... " type="text" class="form-control" id="title" formControlName="city" required minlength="1" maxlength="50">
+        
         <button type="submit"><i class="fa fa-search"></i>Search</button>
     </form>
+
+    <mat-form-field>
+      <input placeholder="I think Brussels is a good choice... " type="text" [matAutocomplete]="auto" [formControl]="myControl" ng-change="search()"/>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let city of cities | async" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="firstFormGroup">
@@ -22,3 +32,27 @@
 </div>
 
 <app-footer ng-init="size()"></app-footer>
+
+
+<!--
+<div class="row">
+  <div id="map"></div>
+</div>
+
+
+<h1>Hello world!</h1>
+
+<div class="search-box">
+  <form class="example-form">
+    <input type="text"
+          placeholder="Search for a city"
+          [formControl]="control"
+          [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let city of cities | async" [value]="city">
+        {{city}}
+      </mat-option>
+    </mat-autocomplete>
+  </form>
+</div>
+-->

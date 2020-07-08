@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -27,12 +28,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
