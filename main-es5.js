@@ -151,7 +151,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\r\n\r\n<div id=\"main-container\" class=\"d-flex justify-content-center align-items-center flex-column\">\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searching()\">\r\n        <h2 class=\"text-center\">Where do you want to go to ?</h2>\r\n        <input placeholder=\"I think Brussels is a good choice... \" type=\"text\" class=\"form-control\" id=\"title\" formControlName=\"city\" required minlength=\"1\" maxlength=\"50\">\r\n        <button type=\"submit\"><i class=\"fa fa-search\"></i>Search</button>\r\n    </form>\r\n\r\n    <mat-horizontal-stepper [linear]=\"isLinear\" #stepper>\r\n        <mat-step [stepControl]=\"firstFormGroup\">\r\n          <form [formGroup]=\"firstFormGroup\">\r\n            <ng-template matStepLabel>City</ng-template>\r\n          </form>\r\n        </mat-step>\r\n        <mat-step [stepControl]=\"secondFormGroup\">\r\n          <form [formGroup]=\"secondFormGroup\">\r\n            <ng-template matStepLabel>Transport</ng-template>\r\n          </form>\r\n        </mat-step>\r\n    </mat-horizontal-stepper>\r\n</div>\r\n\r\n<app-footer ng-init=\"size()\"></app-footer>";
+    __webpack_exports__["default"] = "<app-header></app-header>\r\n\r\n<div id=\"main-container\" class=\"d-flex justify-content-center align-items-center flex-column\">\r\n  <!--\r\n    <form [formGroup]=\"form\" (ngSubmit)=\"searching()\">\r\n        <h2 class=\"text-center\">Where do you want to go to ?</h2>\r\n        <input placeholder=\"I think Brussels is a good choice... \" type=\"text\" class=\"form-control\" id=\"title\" formControlName=\"city\" required minlength=\"1\" maxlength=\"50\">\r\n        \r\n        <button type=\"submit\"><i class=\"fa fa-search\"></i>Search</button>\r\n    </form>\r\n-->\r\n    <form class=\"example-form\">\r\n      <input type=\"text\"\r\n             id=\"searchfield\"\r\n             placeholder=\"I think Brussels is a good choice...\"\r\n             [formControl]=\"control\"\r\n             [matAutocomplete]=\"auto\"\r\n             (input)=\"search($event)\">\r\n      <mat-autocomplete #auto=\"matAutocomplete\">\r\n        <mat-option *ngFor=\"let city of cities\" [value]=\"city\" (click)=\"onSelect(city)\">\r\n          {{city}}\r\n        </mat-option>\r\n      </mat-autocomplete>\r\n    </form>\r\n\r\n    <mat-horizontal-stepper [linear]=\"isLinear\" #stepper>\r\n        <mat-step [stepControl]=\"firstFormGroup\">\r\n          <form [formGroup]=\"firstFormGroup\">\r\n            <ng-template matStepLabel>City</ng-template>\r\n          </form>\r\n        </mat-step>\r\n        <mat-step [stepControl]=\"secondFormGroup\">\r\n          <form [formGroup]=\"secondFormGroup\">\r\n            <ng-template matStepLabel>Transport</ng-template>\r\n          </form>\r\n        </mat-step>\r\n    </mat-horizontal-stepper>\r\n</div>\r\n\r\n<app-footer ng-init=\"size()\"></app-footer>";
     /***/
   },
 
@@ -959,65 +959,89 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _pages_home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _pages_home_home_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./pages/home/home.component */
     "./src/app/pages/home/home.component.ts");
     /* harmony import */
 
 
-    var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/platform-browser/animations */
     "./node_modules/@angular/platform-browser/fesm2015/animations.js");
     /* harmony import */
 
 
-    var _components_header_header_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _components_header_header_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ./components/header/header.component */
     "./src/app/components/header/header.component.ts");
     /* harmony import */
 
 
-    var _pages_about_about_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _pages_about_about_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ./pages/about/about.component */
     "./src/app/pages/about/about.component.ts");
     /* harmony import */
 
 
-    var _pages_collection_collection_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _pages_collection_collection_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ./pages/collection/collection.component */
     "./src/app/pages/collection/collection.component.ts");
     /* harmony import */
 
 
-    var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./components/footer/footer.component */
     "./src/app/components/footer/footer.component.ts");
     /* harmony import */
 
 
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
-    var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _angular_material_stepper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! @angular/material/stepper */
     "./node_modules/@angular/material/esm2015/stepper.js");
     /* harmony import */
 
 
-    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! @angular/material/form-field */
     "./node_modules/@angular/material/esm2015/form-field.js");
+    /* harmony import */
+
+
+    var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! @angular/material/autocomplete */
+    "./node_modules/@angular/material/esm2015/autocomplete.js");
+    /* harmony import */
+
+
+    var _angular_material__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+    /*! @angular/material */
+    "./node_modules/@angular/material/esm2015/material.js");
+    /* harmony import */
+
+
+    var _angular_material_select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+    /*! @angular/material/select */
+    "./node_modules/@angular/material/esm2015/select.js");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
     };
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _pages_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_7__["HeaderComponent"], _pages_about_about_component__WEBPACK_IMPORTED_MODULE_8__["AboutComponent"], _pages_collection_collection_component__WEBPACK_IMPORTED_MODULE_9__["CollectionComponent"], _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_10__["FooterComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_12__["MatStepperModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_13__["MatFormFieldModule"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"], _pages_home_home_component__WEBPACK_IMPORTED_MODULE_6__["HomeComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _pages_about_about_component__WEBPACK_IMPORTED_MODULE_9__["AboutComponent"], _pages_collection_collection_component__WEBPACK_IMPORTED_MODULE_10__["CollectionComponent"], _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_11__["FooterComponent"]],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_7__["BrowserAnimationsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_12__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_12__["ReactiveFormsModule"], _angular_material_stepper__WEBPACK_IMPORTED_MODULE_13__["MatStepperModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_14__["MatFormFieldModule"], _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_15__["MatAutocompleteModule"], _angular_material__WEBPACK_IMPORTED_MODULE_16__["MatInputModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_17__["MatSelectModule"]],
       providers: [],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
     })], AppModule);
@@ -1389,16 +1413,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/forms */
     "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _services_mapbox_mapbox_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../services/mapbox/mapbox.service */
+    "./src/app/services/mapbox/mapbox.service.ts");
 
     var HomeComponent = /*#__PURE__*/function () {
-      function HomeComponent(formBuilder) {
+      function HomeComponent(formBuilder, mapboxService) {
         _classCallCheck(this, HomeComponent);
 
         this.formBuilder = formBuilder;
+        this.mapboxService = mapboxService;
         this.isLinear = false;
-        this.form = this.formBuilder.group({
-          city: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(50), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(1)]]
-        });
+        this.cities = []; // List of cities based on partial search string
+
+        this.selectedCity = null;
+        this.control = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](); // this.form = this.formBuilder.group({
+        //   city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
+        // });
+
         this.firstFormGroup = this.formBuilder.group({
           firstCtrl: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
         });
@@ -1414,7 +1449,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {//this.control.valueChanges.toPromise().then(ev => {console.log('AAA'); this.search(ev)});
+        }
+      }, {
+        key: "search",
+        value: function search(event) {
+          var _this = this;
+
+          console.log("debug");
+          var searchTerm = event.target.value.toLowerCase();
+
+          if (searchTerm && searchTerm.length > 0) {
+            this.mapboxService.search_word(searchTerm).subscribe(function (features) {
+              _this.cities = features.map(function (feat) {
+                return feat.place_name;
+              });
+            });
+          } else {
+            this.cities = [];
+          }
+        }
+      }, {
+        key: "onSelect",
+        value: function onSelect(address) {
+          console.log(address + " is selected");
+          this.selectedCity = address;
+          this.cities = [];
+        }
       }]);
 
       return HomeComponent;
@@ -1423,6 +1484,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     HomeComponent.ctorParameters = function () {
       return [{
         type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
+      }, {
+        type: _services_mapbox_mapbox_service__WEBPACK_IMPORTED_MODULE_3__["MapboxService"]
       }];
     };
 
@@ -1435,6 +1498,90 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /*! ./home.component.css */
       "./src/app/pages/home/home.component.css"))["default"]]
     })], HomeComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/mapbox/mapbox.service.ts":
+  /*!***************************************************!*\
+    !*** ./src/app/services/mapbox/mapbox.service.ts ***!
+    \***************************************************/
+
+  /*! exports provided: MapboxService */
+
+  /***/
+  function srcAppServicesMapboxMapboxServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "MapboxService", function () {
+      return MapboxService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/environments/environment */
+    "./src/environments/environment.ts");
+
+    var MapboxService = /*#__PURE__*/function () {
+      function MapboxService(http) {
+        _classCallCheck(this, MapboxService);
+
+        this.http = http;
+      }
+
+      _createClass(MapboxService, [{
+        key: "search_word",
+        value: function search_word(query) {
+          var url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+          return this.http.get(url + query + '.json?types=address&acces_token=' + src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].mapbox.accessToken, {
+            withCredentials: true
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+            return res.features;
+          }));
+        }
+      }]);
+
+      return MapboxService;
+    }();
+
+    MapboxService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]
+      }];
+    };
+
+    MapboxService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], MapboxService);
     /***/
   },
 
@@ -1468,7 +1615,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     var environment = {
-      production: false
+      production: false,
+      mapbox: {
+        accessToken: 'pk.eyJ1IjoiaGRlbHZhIiwiYSI6ImNrY2MxZmF2bzAwY3oycGp6aDYzZXZrNGYifQ.Va0SpldH0PEHv8FuThOrtg'
+      }
     };
     /*
      * For easier debugging in development mode, you can import the following file
