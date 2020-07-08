@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
   }
 
   search(event: any) {
-    console.log("debug");
     const searchTerm = event.target.value.toLowerCase();
     if (searchTerm && searchTerm.length > 0) {
       this.mapboxService
