@@ -11,13 +11,9 @@ import { AboutComponent } from './pages/about/about.component';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from './components/card/card.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material';
-import {MatSelectModule} from '@angular/material/select';
+import { MaterialModule } from './material/material.module';
+
 
 @NgModule({
   declarations: [
@@ -36,12 +32,7 @@ import {MatSelectModule} from '@angular/material/select';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatSelectModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
