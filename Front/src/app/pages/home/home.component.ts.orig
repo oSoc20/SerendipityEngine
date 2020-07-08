@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+<<<<<<< HEAD
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Transport } from 'src/app/utilitaries/transport-enum';
+=======
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MapboxService, Feature} from '../../services/mapbox/mapbox.service'
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+>>>>>>> 1332fd7561f9947f8ebed24520083f5b80f7424d
 
 @Component({
   selector: 'app-home',
@@ -17,12 +21,10 @@ export class HomeComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+<<<<<<< HEAD
   thirdFormGroup: FormGroup;
 
   selectedTransport : Transport;
-  cities: string[] = []; // List of cities based on partial search string
-  selectedCity = null;
-  control = new FormControl();
 
   waysOfTransports = [
     { id : Transport.Car, label : "by car",  picture : "car" },
@@ -30,12 +32,17 @@ export class HomeComponent implements OnInit {
     { id : Transport.Foot, label : "by foot",  picture : "foot" },
     { id : Transport.Other, label : "other",  picture : "foot" },
   ]
+=======
+  cities: string[] = []; // List of cities based on partial search string
+  selectedCity = null;
+  control = new FormControl();
+>>>>>>> 1332fd7561f9947f8ebed24520083f5b80f7424d
 
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
 
-    this.form = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
-    });
+    // this.form = this.formBuilder.group({
+    //   city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
+    // });
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
