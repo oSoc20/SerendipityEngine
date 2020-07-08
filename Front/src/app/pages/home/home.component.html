@@ -1,10 +1,26 @@
 <app-header></app-header>
 
 <div id="main-container" class="d-flex justify-content-center align-items-center flex-column">
+  <!--
     <form [formGroup]="form" (ngSubmit)="searching()">
         <h2 class="text-center">Where do you want to go to ?</h2>
         <input placeholder="I think Brussels is a good choice... " type="text" class="form-control" id="title" formControlName="city" required minlength="1" maxlength="50">
+        
         <button type="submit"><i class="fa fa-search"></i>Search</button>
+    </form>
+-->
+    <form class="example-form">
+      <input type="text"
+             id="searchfield"
+             placeholder="I think Brussels is a good choice..."
+             [formControl]="control"
+             [matAutocomplete]="auto"
+             (input)="search($event)">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city)">
+          {{city}}
+        </mat-option>
+      </mat-autocomplete>
     </form>
 
     <mat-horizontal-stepper [linear]="isLinear" #stepper>
