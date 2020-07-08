@@ -13,11 +13,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
+<<<<<<< HEAD
 import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from './components/card/card.component';
+
+=======
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material';
 import {MatSelectModule} from '@angular/material/select';
+>>>>>>> 1332fd7561f9947f8ebed24520083f5b80f7424d
 
 @NgModule({
   declarations: [
@@ -38,10 +42,13 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatCardModule,
+<<<<<<< HEAD
+    MatCardModule
+=======
     MatAutocompleteModule,
     MatInputModule,
     MatSelectModule
+>>>>>>> 1332fd7561f9947f8ebed24520083f5b80f7424d
   ],
   providers: [],
   bootstrap: [AppComponent]
