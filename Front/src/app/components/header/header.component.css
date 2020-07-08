@@ -1,13 +1,18 @@
 nav {
-    background-color: transparent ;
+    background-color: transparent;
+    padding: 1%;
 }
 nav a {
-    margin-top:3%;
     color : #63918A;
 }
 
+
+a.navbar-brand {
+    color:white;
+}
 nav a:hover {
     color : white;
+    cursor: pointer;
 }
 
 .navbar-nav {

@@ -1,29 +1,36 @@
-#main-container {
-    width: 100%;
+
+input {
+    border: 2px solid #006d77;
+    border-radius : 10px;
+    padding:20px;
 }
 
-form {
-    margin:5%;
-}
 h2 {
     color : white;
-    margin-bottom:10%;
+    margin:3% 0% 3% 0%;
 }
 
 button[type="submit"] {
-    background-color: white;
+    background-color: #006d77;
     border : none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding:5px 10px 5px 10px;
-    transition-duration: 3s
+    transition-duration: 3s;
+    color:white;
+    position: absolute;
+    top:5px;
+    right: 5px;
 }
 
-button[type="submit"]:hover {
-    zoom: 1.1;
+.search {
+    position: relative;
+    width:70%;
+    margin:0% 15% 0% 15%;
 }
 
 .fa-search {
     margin-right:10px;
+    color:white;
 }
 
 .mat-stepper-horizontal {
@@ -34,4 +41,39 @@ button[type="submit"]:hover {
     background-color: white;
     color:black;
  }
+
+ :host ::ng-deep .mat-horizontal-content-container {
+    width: 100% !important;
+}
+
+.card {
+    border : 3px solid #63918a;
+    background-color: #63918a;
+    border-radius: 15px;
+    color:white;
+    padding:0;
+    margin: 0;
+}
+
+.active {
+    border : 3px solid #006d77 !important;
+    background-color: #006d77 !important;
+}
+
+.card p {
+    padding:5px;
+}
+
+.picture {
+    background-color: white;
+    border-radius: 15px 15px 0px 0px;
+    padding:10%;
+    width: 120px;
+}
+
+.selected {
+    border: 1px solid #006d77;
+    background-color: #006d77;
+    color:white
+}
 
