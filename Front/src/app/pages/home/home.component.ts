@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Transport } from 'src/app/utilitaries/transport-enum';
+import { MapboxService, Feature} from '../../services/mapbox/mapbox.service'
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +20,9 @@ export class HomeComponent implements OnInit {
   thirdFormGroup: FormGroup;
 
   selectedTransport : Transport;
+  cities: string[] = []; // List of cities based on partial search string
+  selectedCity = null;
+  control = new FormControl();
 
   waysOfTransports = [
     { id : Transport.Car, label : "by car",  picture : "car" },
@@ -25,7 +31,11 @@ export class HomeComponent implements OnInit {
     { id : Transport.Other, label : "other",  picture : "foot" },
   ]
 
+  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
 
+    // this.form = this.formBuilder.group({
+    //   city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
+    // });
   constructor(private formBuilder: FormBuilder) {
 
     this.form = this.formBuilder.group({
@@ -57,7 +67,27 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    //this.control.valueChanges.toPromise().then(ev => {console.log('AAA'); this.search(ev)});
+  }
+
+  search(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm && searchTerm.length > 0) {
+      this.mapboxService
+        .search_word(searchTerm)
+        .subscribe((features: Feature[]) => {
+          this.cities = features.map(feat => feat.place_name);
+        });
+    }
+    else {
+      this.cities = [];
+    }
+  }
+
+  onSelect(address: string) {
+    console.log(address + " is selected");
+    this.selectedCity = address;
+    this.cities = [];
   }
 
 }

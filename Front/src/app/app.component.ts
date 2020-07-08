@@ -17,6 +17,5 @@ export class AppComponent {
   title = 'SerendipityFront';
 
   map : Map;
-  constructor() {}
-
+  
 }
