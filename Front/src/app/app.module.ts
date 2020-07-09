@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from './components/card/card.component';
 import { MaterialModule } from './material/material.module';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MaterialModule } from './material/material.module';
     AboutComponent,
     CollectionComponent,
     FooterComponent,
-    CardComponent
+    CardComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
