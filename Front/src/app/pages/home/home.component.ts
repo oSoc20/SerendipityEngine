@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
 
   selectedTransport : Transport;
   cities: string[] = []; // List of cities based on partial search string
-  selectedCity = null;
+  cityList: Feature[] = []; // List of city suggestions
+  selectedCity: Feature = null;
   control = new FormControl();
 
   waysOfTransports = [
@@ -72,6 +73,7 @@ export class HomeComponent implements OnInit {
         .search_word(searchTerm)
         .subscribe((features: Feature[]) => {
           this.cities = features.map(feat => feat.place_name);
+          this.cityList = features;
         });
     }
     else {
@@ -81,7 +83,8 @@ export class HomeComponent implements OnInit {
 
   onSelect(address: string) {
     console.log(address + " is selected");
-    this.selectedCity = address;
+    this.selectedCity = this.cityList.find(city => city.place_name === address);
+    console.log(this.selectedCity);
     this.cities = [];
   }
 

@@ -10,7 +10,12 @@ export interface MapboxOutput {
 }
 
 export interface Feature {
+  id: string;
+  properties: string;
+  text: string;
   place_name: string;
+  bbox: [];
+  center: [];
 }
 
 @Injectable({
