@@ -29,7 +29,11 @@
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Transport</ng-template>
         <form class="stepper-content col-10 col-md-8 m-auto" [formGroup]="form">
-          <h2 class="text-center">How do you transport to Brussels ?</h2>
+          <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How do you transport to your selected city ?</h2>
+          <ng-template #elseBlock>
+            <h2 class="text-center">How do you transport to {{selectedCity.text}} ?</h2>
+          </ng-template>
+          
           <div class="row d-flex justify-content-between">
             <div *ngFor="let transport of waysOfTransports" [ngClass]="{'active': selectedTransport == transport.id, 'card' : true}" (click)="changeSelectedTransport(transport.id)">
               <img class="img-fluid picture m-auto" src="assets/pictures/{{transport.picture}}.svg"/>
@@ -41,4 +45,3 @@
     </mat-step>
 
 </mat-horizontal-stepper>
-
