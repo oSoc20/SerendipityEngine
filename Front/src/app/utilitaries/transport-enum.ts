@@ -2,5 +2,7 @@ export enum Transport {
     Car,
     Bicycle,
     Foot,
-    Other
+    Train,
+    Public,
+    Other,
 }
