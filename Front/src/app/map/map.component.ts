@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 
@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 export class MapComponent implements OnInit {
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
-  lat = 50.850340;
-  lng = 4.351710;
+  @Input() coord = [4.351710, 50.850340]; //long, lat
+
   constructor() { }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class MapComponent implements OnInit {
         container: 'map',
         style: this.style,
         zoom: 13,
-        center: [this.lng, this.lat],
+        center: [this.coord[0], this.coord[1]],
         pitch: 0,//60, // pitch in degrees
         bearing: 0, // bearing in degrees
     });

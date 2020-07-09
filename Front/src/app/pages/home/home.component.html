@@ -46,4 +46,7 @@
 
 </mat-horizontal-stepper>
 
-<app-map></app-map>
+<app-map *ngIf="!selectedCity; else elseBlockMap"></app-map>
+<ng-template #elseBlockMap>
+  <app-map [coord]="selectedCity.center"></app-map>
+</ng-template>
