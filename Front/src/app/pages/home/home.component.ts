@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
 
   
   cities: string[] = []; // List of cities based on partial search string
-  selectedCity = null;
+  cityList: Feature[] = []; // List of city suggestions
+  selectedCity: Feature = null;  control = new FormControl();
 
   destinationControl = new FormControl();
   originControl = new FormControl();
@@ -80,6 +81,7 @@ export class HomeComponent implements OnInit {
         .search_word(searchTerm)
         .subscribe((features: Feature[]) => {
           this.cities = features.map(feat => feat.place_name);
+          this.cityList = features;
         });
     }
     else {
@@ -88,7 +90,8 @@ export class HomeComponent implements OnInit {
   }
 
   onSelect(address: string) {
-    this.selectedCity = address;
+    this.selectedCity = this.cityList.find(city => city.place_name === address);
+    console.log(this.selectedCity);
     this.cities = [];
   }
 
