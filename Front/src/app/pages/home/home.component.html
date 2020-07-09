@@ -56,7 +56,7 @@
       <form [formGroup]="thirdFromGroup">
         <ng-template matStepLabel>Transport</ng-template>
         <div class="stepper-content col-10 m-auto">
-          <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How do you transport to your selected city ?</h2>
+          <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How do you transport to your destination ?</h2>
           <ng-template #elseBlock>
             <h2 class="text-center">How do you transport to {{selectedCity.text}} ?</h2>
           </ng-template>
