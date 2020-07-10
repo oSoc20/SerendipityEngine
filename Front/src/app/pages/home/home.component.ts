@@ -92,15 +92,15 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onSelectOrigin(address: string) {
-    this.selectedCityOrigin = this.cityList.find(city => city.text === address);
+  onSelectOrigin(place: string) {
+    this.selectedCityOrigin = this.cityList.find(city => city.text === place);
     console.log("origin", this.selectedCityOrigin);
     console.log("value", this.value);
     this.cities = [];
   }
 
-  onSelectDestination(address: string) {
-    this.selectedCityDestination = this.cityList.find(city => city.text === address);
+  onSelectDestination(place: string) {
+    this.selectedCityDestination = this.cityList.find(city => city.text === place);
     console.log("destination", this.selectedCityDestination);
     
     this.cities = [];
