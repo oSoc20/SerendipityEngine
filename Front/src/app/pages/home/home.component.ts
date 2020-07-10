@@ -29,9 +29,10 @@ export class HomeComponent implements OnInit {
   selectedCityOrigin: Feature = null;
   selectedCityDestination: Feature = null;
   control = new FormControl();
+  value: string;
 
-  destinationControl = new FormControl();
-  originControl = new FormControl();
+  destinationControl = new FormControl(); 
+  originControl;
 
   transports = [
     { id : Transport.Car, label : "by car",  picture : "car" },
@@ -46,10 +47,10 @@ export class HomeComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
 
     this.destination = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
+      destinationControl: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
     });
     this.origin = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
+      originControl: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
     });
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -60,7 +61,6 @@ export class HomeComponent implements OnInit {
     this.thirdFormGroup = this.formBuilder.group({
       thirdCtrl: ['', Validators.required]
     });
-
    }
 
   ngAfterViewInit() {
@@ -82,7 +82,8 @@ export class HomeComponent implements OnInit {
       this.mapboxService
         .search_word(searchTerm)
         .subscribe((features: Feature[]) => {
-          this.cities = features.map(feat => feat.place_name);
+          //this.cities = features.map(feat => feat.place_name);
+          this.cities = features.map(feat => feat.text);
           this.cityList = features;
         });
     }
@@ -91,15 +92,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onSelect(address: string, origin: boolean) {
-    if (origin) {
-      this.selectedCityOrigin = this.cityList.find(city => city.place_name === address);
-      console.log(this.selectedCityOrigin);
-    }
-    else {
-      this.selectedCityDestination = this.cityList.find(city => city.place_name === address);
-      console.log(this.selectedCityDestination);
-    }
+  onSelectOrigin(address: string) {
+    this.selectedCityOrigin = this.cityList.find(city => city.text === address);
+    console.log("origin", this.selectedCityOrigin);
+    console.log("value", this.value);
+    this.cities = [];
+  }
+
+  onSelectDestination(address: string) {
+    this.selectedCityDestination = this.cityList.find(city => city.text === address);
+    console.log("destination", this.selectedCityDestination);
     
     this.cities = [];
   }

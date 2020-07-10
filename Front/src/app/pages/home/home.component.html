@@ -8,7 +8,7 @@
               <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
               <div class="search">
                 <input 
-                       formControlName="city"
+                       formControlName="destinationControl"
                        type="text"
                        id="title"
                        class="form-control"
@@ -16,8 +16,8 @@
                        [matAutocomplete]="auto"
                        (input)="search($event)">
               <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
-                {{city}}
+                <mat-option *ngFor="let city of cities" [value]="city" (onSelectionChange)="onSelectDestination(city)">
+                  {{city}}
                 </mat-option>
               </mat-autocomplete>
             <button type="submit" matStepperNext><i class="fa fa-search"></i>Search</button>
@@ -34,16 +34,16 @@
               <h2 class="text-center">Where do you come from ?</h2>
               <div class="search">
                 <input
-                       formControlName="city"
+                       formControlName="originControl"
                        type="text"
                        id="title"
                        class="form-control"
-                       placeholder="I think Brussels is a good choice..."
+                       placeholder="I think Ghent is a good choice..."
                        [matAutocomplete]="auto"
                        (input)="search($event)">
               <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, true)">
-                {{city}}
+                <mat-option *ngFor="let city of cities" [value]="city" (onSelectionChange)="onSelectOrigin(city)">
+                  {{city}}
                 </mat-option>
               </mat-autocomplete>
             <button type="submit" matStepperNext><i class="fa fa-search"></i>Search</button>
@@ -74,13 +74,11 @@
 </mat-horizontal-stepper>
 
 <!--
-<h3 *ngIf="!selectedCity; else elseBlockTest">TEST</h3>
+<h3 *ngIf="!selectedCityOrigin || !selectedCityDestination; else elseBlockTest">TEST</h3>
 <ng-template #elseBlockTest>
   <h3>{{mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)}}</h3>
 </ng-template>
 -->
 
-<app-map *ngIf="!selectedCityOrigin || !selectedCityDestination; else elseBlockMap"></app-map>
-<ng-template #elseBlockMap>
-  <app-map [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
-</ng-template>
+<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
+

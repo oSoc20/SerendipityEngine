@@ -11,7 +11,7 @@ export class MapComponent implements OnInit {
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
   @Input() coord = [4.351710, 50.850340]; //long, lat
-  @Input() bearing: number = 90; //angle
+  @Input() bearing: number = 0; //angle
 
   constructor() { }
 
