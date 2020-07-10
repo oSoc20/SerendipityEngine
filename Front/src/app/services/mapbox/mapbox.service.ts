@@ -34,7 +34,7 @@ export class MapboxService {
   }
 
   calculate_bearing(coordA, coordB) {
-    // angle in degrees
+    // angle in degrees: Math.atan2(lon2 - lon1, lat2 - lat1) * 180 / Math.PI;
     return Math.atan2(coordB[1] - coordA[1], coordB[0] - coordA[0]) * 180 / Math.PI;
   }
 }
