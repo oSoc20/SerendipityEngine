@@ -26,7 +26,9 @@ export class HomeComponent implements OnInit {
   
   cities: string[] = []; // List of cities based on partial search string
   cityList: Feature[] = []; // List of city suggestions
-  selectedCity: Feature = null;  control = new FormControl();
+  selectedCityOrigin: Feature = null;
+  selectedCityDestination: Feature = null;
+  control = new FormControl();
 
   destinationControl = new FormControl();
   originControl = new FormControl();
@@ -89,9 +91,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onSelect(address: string) {
-    this.selectedCity = this.cityList.find(city => city.place_name === address);
-    console.log(this.selectedCity);
+  onSelect(address: string, origin: boolean) {
+    if (origin) {
+      this.selectedCityOrigin = this.cityList.find(city => city.place_name === address);
+      console.log(this.selectedCityOrigin);
+    }
+    else {
+      this.selectedCityDestination = this.cityList.find(city => city.place_name === address);
+      console.log(this.selectedCityDestination);
+    }
+    
     this.cities = [];
   }
 
