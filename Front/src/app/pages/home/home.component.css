@@ -5,6 +5,10 @@ input {
     padding:20px;
 }
 
+input:hover {
+    border : 2px solid blue;
+}
+
 h2 {
     color : black;
     margin:3% 0% 3% 0%;
