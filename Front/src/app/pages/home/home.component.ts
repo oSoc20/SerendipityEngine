@@ -23,8 +23,6 @@ export class HomeComponent implements OnInit {
   selectedDestinationCity : Feature = null;
   selectedOriginCity : Feature = null;
   
-  control = new FormControl();
-  
   fakeControl : FormGroup;
 
   selectedTransport : Transport;

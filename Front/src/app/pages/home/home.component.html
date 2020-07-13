@@ -1,91 +1,87 @@
 <mat-horizontal-stepper id="main-container" class="d-flex align-items-center ml-5 flex-column" [linear]="isLinear" #stepper>
 
-    <mat-step [stepControl]="fakeControl">
-        <ng-template matStepLabel>Destination</ng-template>
-
-        <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
-        <div class="search">
-          <input 
-                  type="text"
-                  class="form-control"
-                  placeholder="I think Brussels is a good choice..."
-                  [matAutocomplete]="auto"
-                  (input)="search($event)">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
+  <mat-step [stepControl]="fakeControl">
+    <ng-template matStepLabel>Destination</ng-template>
+    <form class="stepper-content" [formGroup]="destination">
+      <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
+      <div class="search">
+        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..."
+          [matAutocomplete]="auto" (input)="search($event)">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
             {{city}}
-            </mat-option>
-          </mat-autocomplete>
-          <button matStepperNext><i class="fa fa-search"></i>Search</button>
-          </div>
-
-        </form>
-    </mat-step>
-
-    <mat-step [stepControl]="fakeControl">
-        <ng-template matStepLabel>City of living</ng-template>
-      <form class="stepper-content" [formGroup]="origin">
-        <h2 class="text-center">Where do you come from ?</h2>
-        <div class="search">
-              <input
-                    type="text"
-                    class="form-control"
-                    placeholder="I think Brussels is a good choice..."
-                    [matAutocomplete]="auto2"
-                    (input)="search($event)">
-              <mat-autocomplete #auto2="matAutocomplete">
-                <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, true)">
-                {{city}}
-                </mat-option>
-              </mat-autocomplete>
-            <button matStepperNext><i class="fa fa-search"></i>Search</button>
-        </div>
-    </mat-step>
-
-
-    <mat-step [stepControl]="fakeControl">
-      <ng-template matStepLabel>Transport</ng-template>
-      <div class="stepper-content col-10 m-auto">
-        <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How do you transport to your selected city ?</h2>
-        <ng-template #elseBlock>
-          <h2 class="text-center">How do you transport to {{selectedCity.text}} ?</h2>
-        </ng-template>
-          
-        <div class="row d-flex justify-content-between">
-          <div *ngFor="let transport of transports" [ngClass]="{'active': selectedTransport == transport.id, 'card' : true}" (click)="changeSelectedTransport(transport.id)">
-            <img class="img-fluid picture m-auto" src="assets/pictures/{{transport.picture}}.svg"/>
-            <p class="m-auto text-center">{{transport.label}}</p>
-          </div>
-        </div>
-
-        <button matStepperNext *ngIf="selectedTransport">Next</button>
+          </mat-option>
+        </mat-autocomplete>
+        <button matStepperNext><i class="fa fa-search"></i>Search</button>
       </div>
-    </mat-step>
 
-    <mat-step [stepControl]="fakeControl" class="m-auto">
-      <ng-template matStepLabel>Frequency</ng-template>
-      <div class="stepper-content col-10 m-auto">
-        <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How often do you go to the selected city ?</h2>
-        <ng-template #elseBlock>
-          <h2 class="text-center">How often do you go to {{selectedCity.text}} ?</h2>
-        </ng-template>
-        
-        <mat-form-field class="m-auto">
-          <mat-select placeholder="Select a frequency" class="m-auto" [formControl]="selectedFrequency">
-            <mat-option class="align-items-center" *ngFor="let frequency of frequencies" [value]="frequency.id">{{frequency.label}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+    </form>
+  </mat-step>
 
-        <button matStepperNext *ngIf="selectedFrequency.value">Next</button>
+  <mat-step [stepControl]="fakeControl">
+    <ng-template matStepLabel>City of living</ng-template>
+    <form class="stepper-content" [formGroup]="origin">
+      <h2 class="text-center">Where do you come from ?</h2>
+      <div class="search">
+        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..."
+          [matAutocomplete]="auto2" (input)="search($event)">
+        <mat-autocomplete #auto2="matAutocomplete">
+          <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, true)">
+            {{city}}
+          </mat-option>
+        </mat-autocomplete>
+        <button matStepperNext><i class="fa fa-search"></i>Search</button>
       </div>
-    </mat-step>
+    </form>
+  </mat-step>
 
-    <mat-step [stepControl]="fakeControl">
-        <ng-template matStepLabel>Generate</ng-template>
-        <div class="stepper-content col-10 m-auto">
-          <button clickclass="btn btn-secondary">Generate my map</button>
+
+  <mat-step [stepControl]="fakeControl">
+    <ng-template matStepLabel>Transport</ng-template>
+    <div class="stepper-content col-10 m-auto">
+      <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How do you transport to your selected city ?</h2>
+      <ng-template #elseBlock>
+        <h2 class="text-center">How do you transport to {{selectedCity.text}} ?</h2>
+      </ng-template>
+
+      <div class="row d-flex justify-content-between">
+        <div *ngFor="let transport of transports"
+          [ngClass]="{'active': selectedTransport == transport.id, 'card' : true}"
+          (click)="changeSelectedTransport(transport.id)">
+          <img class="img-fluid picture m-auto" src="assets/pictures/{{transport.picture}}.svg" />
+          <p class="m-auto text-center">{{transport.label}}</p>
         </div>
-    </mat-step>
+      </div>
+
+      <button matStepperNext *ngIf="selectedTransport">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="fakeControl" class="m-auto">
+    <ng-template matStepLabel>Frequency</ng-template>
+    <div class="stepper-content col-10 m-auto">
+      <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How often do you go to the selected city ?</h2>
+      <ng-template #elseBlock>
+        <h2 class="text-center">How often do you go to {{selectedCity.text}} ?</h2>
+      </ng-template>
+
+      <mat-form-field class="m-auto">
+        <mat-select placeholder="Select a frequency" class="m-auto" [formControl]="selectedFrequency">
+          <mat-option class="align-items-center" *ngFor="let frequency of frequencies" [value]="frequency.id">
+            {{frequency.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button matStepperNext *ngIf="selectedFrequency.value">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="fakeControl">
+    <ng-template matStepLabel>Generate</ng-template>
+    <div class="stepper-content col-10 m-auto">
+      <button clickclass="btn btn-secondary">Generate my map</button>
+    </div>
+  </mat-step>
 
 </mat-horizontal-stepper>
 
@@ -94,7 +90,8 @@
 <ng-template #elseBlockTest>
   <h3>{{mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)}}</h3>
 </ng-template>
--->
 
-<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
 
+<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center"
+  [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
+  -->
