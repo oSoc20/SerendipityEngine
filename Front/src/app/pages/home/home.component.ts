@@ -27,7 +27,14 @@ export class HomeComponent implements OnInit {
 
   cities: string[] = []; // List of cities based on partial search string
   cityList: Feature[] = []; // List of city suggestions
-  
+
+  selectedCityOrigin: Feature = null;
+  selectedCityDestination: Feature = null;
+  control = new FormControl();
+  value: string;
+
+  //destinationControl = new FormControl(); 
+  //originControl;
 
   transports = [
     { id : Transport.Car, label : "by car",  picture : "car" },
@@ -47,10 +54,7 @@ frequencies = [
     { id : Frequency.Usually, label : "Usually"},
     { id : Frequency.NearlyAlways, label : "Nearly always"},
     { id : Frequency.Always, label : "Always"},
-
 ]
-
-  
 
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, private store : StoreService) {
     this.fakeControl = this.formBuilder.group({
@@ -77,7 +81,8 @@ frequencies = [
       this.mapboxService
         .search_word(searchTerm)
         .subscribe((features: Feature[]) => {
-          this.cities = features.map(feat => feat.place_name);
+          //this.cities = features.map(feat => feat.place_name);
+          this.cities = features.map(feat => feat.text);
           this.cityList = features;
         });
     }
@@ -85,6 +90,7 @@ frequencies = [
       this.cities = [];
     }
   }
+
 
   onSelect(address: string, origin : boolean) {
     let city = this.cityList.find(city => city.place_name === address);
