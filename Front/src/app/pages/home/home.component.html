@@ -1,32 +1,32 @@
-<mat-horizontal-stepper id="main-container" class="d-flex align-items-center ml-5 flex-column" [linear]="isLinear" #stepper>
+<mat-horizontal-stepper id="main-container" class="d-flex align-items-center flex-column" [linear]="isLinear" #stepper>
 
-  <mat-step [stepControl]="fakeControl">
+  <mat-step [stepControl]="fakeControl" class="h-100 d-flex justify-content-center align-items-center">
       <ng-template matStepLabel>Destination</ng-template>
 
       <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
-      <div class="search">
+      <div class="search d-flex flex-column align-items-center">
         <input 
                 type="text"
-                class="form-control"
                 placeholder="I think Brussels is a good choice..."
                 [matAutocomplete]="auto"
+                class="col-12 col-sm-6 p-3"
                 (input)="search($event)">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
           {{city}}
           </mat-option>
         </mat-autocomplete>
-        <button matStepperNext><i class="fa fa-search"></i>Search</button>
-        </div>
+        <button matStepperNext class="d-block mt-5"><i class="fa fa-search"></i>Search</button>
+      </div>
   </mat-step>
 
   <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>City of living</ng-template>
       <h2 class="text-center">Where do you come from ?</h2>
-      <div class="search">
+      <div class="search d-flex flex-column align-items-center">
             <input
                   type="text"
-                  class="form-control"
+                  class="col-12 col-sm-6 p-3"
                   placeholder="I think Brussels is a good choice..."
                   [matAutocomplete]="auto2"
                   (input)="search($event)">
@@ -35,17 +35,17 @@
               {{city}}
               </mat-option>
             </mat-autocomplete>
-          <button matStepperNext><i class="fa fa-search"></i>Search</button>
+          <button matStepperNext class="d-block mx-auto mt-5"><i class="fa fa-search"></i>Search</button>
       </div>
   </mat-step>
 
 
   <mat-step [stepControl]="fakeControl">
     <ng-template matStepLabel>Transport</ng-template>
-    <div class="stepper-content col-10 m-auto">
+    <div class="stepper-content col-12 m-auto">
       <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlock">How do you transport to your selected city ?</h2>
       <ng-template #elseBlock>
-        <h2 class="text-center">How do you transport to {{store.selectedDestinationCity.text}} ?</h2>
+        <h2 class="text-center">How do you transport to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
         
       <div class="row d-flex justify-content-between">
@@ -54,17 +54,16 @@
           <p class="m-auto text-center">{{transport.label}}</p>
         </div>
       </div>
-
-      <button matStepperNext *ngIf="store.selectedTransport">Next</button>
+      <button class="d-block mx-auto mt-5" matStepperNext *ngIf="store.selectedTransport">Next</button>
     </div>
   </mat-step>
 
   <mat-step [stepControl]="fakeControl" class="m-auto">
     <ng-template matStepLabel>Frequency</ng-template>
-    <div class="stepper-content col-10 m-auto">
+    <div class="d-flex justify-content-center flex-column">
       <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlock">How often do you go to the selected city ?</h2>
       <ng-template #elseBlock>
-        <h2 class="text-center">How often do you go to {{store.selectedDestinationCity.text}} ?</h2>
+        <h2 class="text-center">How often do you go to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
       
       <mat-form-field class="m-auto">
@@ -73,13 +72,13 @@
         </mat-select>
       </mat-form-field>
 
-      <button matStepperNext *ngIf="store.selectedFrequency.value">Next</button>
+      <button class="mx-auto mt-5" matStepperNext *ngIf="store.selectedFrequency.value">Next</button>
     </div>
   </mat-step>
 
   <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>Generate</ng-template>
-      <div class="stepper-content col-10 m-auto">
+      <div class="d-flex align-items-center justify-content-center">
         <button routerLink="/map" (click)="display()" clickclass="btn btn-secondary">Generate my map</button>
       </div>
   </mat-step>

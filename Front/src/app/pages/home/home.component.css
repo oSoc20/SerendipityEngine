@@ -1,78 +1,35 @@
 
-input {
-    border: 2px solid #006d77;
-    border-radius : 10px;
-    padding:20px;
-}
 
-input:hover {
-    border : 2px solid blue;
-}
-
-h2 {
-    color : black;
-    margin:3% 0% 3% 0%;
-}
-
-button[type="submit"] {
-    background-color: #006d77;
-    border : none;
-    border-radius: 10px;
-    padding:5px 10px 5px 10px;
-    transition-duration: 3s;
-    color:white;
-    position: absolute;
-    top:5px;
-    right: 5px;
-}
-
-.search {
-    position: relative;
-    width:70%;
-    margin:0% 15% 0% 15%;
-}
-
-.fa-search {
-    margin-right:10px;
-    color:white;
-}
-
-.mat-stepper-horizontal {
-    background-color: transparent;
-}
-
-::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-icon {
-    background-color: white;
-    color:black;
- }
-
+/*
  :host ::ng-deep .mat-horizontal-content-container {
     width: 100% !important;
 }
+*/
 
 .card {
-    border : 3px solid #63918a;
-    background-color: #63918a;
+    border : 3px solid grey;
+    background-color: grey;
     border-radius: 15px;
     color:white;
     padding:0;
     margin: 0;
 }
 
-.active {
-    border : 3px solid #006d77 !important;
-    background-color: #006d77 !important;
+.cityName {
+    color : #8c00ff;
 }
 
-.card p {
-    padding:5px;
+.active {
+    border : 3px solid #8c00ff !important;
+    background-color: #8c00ff !important;
 }
+
 
 .picture {
     background-color: white;
     border-radius: 15px 15px 0px 0px;
     padding:10%;
-    width: 120px;
+    width: 100px;
 }
 
 .selected {
@@ -80,4 +37,77 @@ button[type="submit"] {
     background-color: #006d77;
     color:white
 }
+
+
+
+#main-container {
+    width: 100%;
+}
+
+
+input:focus {
+  border-color: #8c00ff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+input:hover {
+    border: 0.2rem #8c00ff solid;
+}
+
+h2 {
+    color : #161616;
+    font-size: 3rem;
+    font-family: "Playfair Display", "serif";
+    font-weight: 600;
+    margin-bottom:4%;
+}
+
+.text-bold {
+  font-weight: 900;
+}
+
+input {
+  border: 0.2rem #b4b6b9 solid;
+  border-radius: 0.5rem;
+  transition: border 0.5s ease-in-out;
+}
+
+
+
+button {
+    font-size: 1.2rem;
+    font-family: "roboto";
+    background-color: #8c00ff;
+    border: #8c00ff 0.2rem solid;
+    border-radius: 5px;
+    padding:0.4rem 1.5rem;
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+button:hover {
+
+    border: #8c00ff 0.2rem solid;
+    background-color: white;
+    color: #8c00ff;
+}
+
+.fa-search {
+    margin-right:20px;
+}
+
+.mat-stepper-horizontal {
+    background-color: transparent;
+}
+
+::ng-deep .mat-step-icon-selected {
+    background-color: #8c00ff !important;
+    color:white;
+ }
+
+ ::ng-deep .mat-step-header {
+     color:white;
+ }
 

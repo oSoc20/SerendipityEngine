@@ -3,7 +3,6 @@ export enum Transport {
     Bicycle,
     Foot,
     Train,
-    IntraCity,
     Public,
     Other,
 }

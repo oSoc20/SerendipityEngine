@@ -43,8 +43,8 @@ export class HomeComponent implements OnInit {
     { id : Transport.Bicycle, label : "by bicycle",  picture : "bicycle" },
     { id : Transport.Foot, label : "by foot",  picture : "foot" },
     { id : Transport.Train, label : "by train",  picture : "train" },
-    { id : Transport.IntraCity, label : "public transport",  picture : "bus" },
-    { id : Transport.Other, label : "other",  picture : "bus" },
+    { id : Transport.Public, label : "public",  picture : "bus" },
+    { id : Transport.Other, label : "other",  picture : "other" },
 ]
 
 frequencies = [
@@ -69,6 +69,7 @@ frequencies = [
 
   ngAfterViewInit() {
     document.getElementById('main-container').style.height = (window.innerHeight - document.getElementsByTagName("header")[0].offsetHeight - document.getElementsByTagName("footer")[0].offsetHeight) + "px";
+
   }
 
   changeSelectedTransport(value) {
