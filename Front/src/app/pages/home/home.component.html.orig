@@ -18,10 +18,13 @@
           </mat-autocomplete>
           <button matStepperNext><i class="fa fa-search"></i>Search</button>
           </div>
+
+        </form>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
         <ng-template matStepLabel>City of living</ng-template>
+      <form class="stepper-content" [formGroup]="origin">
         <h2 class="text-center">Where do you come from ?</h2>
         <div class="search">
               <input
@@ -86,6 +89,8 @@
 
 </mat-horizontal-stepper>
 
+<<<<<<< HEAD
+=======
 <!--
 <h3 *ngIf="!selectedCityOrigin || !selectedCityDestination; else elseBlockTest">TEST</h3>
 <ng-template #elseBlockTest>
@@ -94,4 +99,5 @@
 -->
 
 <app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
+>>>>>>> 7f323423b52d25009ed2400c9e7bdb888561aef5
 
