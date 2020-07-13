@@ -58,7 +58,7 @@ frequencies = [
     { id : Frequency.Always, label : "Always"},
 ]
 
-  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, private store : StoreService) {
+  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, public store : StoreService) {
     this.fakeControl = this.formBuilder.group({
       fake : ['',[Validators.required,  Validators.maxLength(100),  Validators.minLength(10)]], 
     });

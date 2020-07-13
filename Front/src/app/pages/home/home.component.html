@@ -49,7 +49,7 @@
       </ng-template>
         
       <div class="row d-flex justify-content-between">
-        <div *ngFor="let transport of transports" [ngClass]="{'active': selectedTransport == transport.id, 'card' : true}" (click)="changeSelectedTransport(transport.id)">
+        <div *ngFor="let transport of transports" [ngClass]="{'active': store.selectedTransport == transport.id, 'card' : true}" (click)="changeSelectedTransport(transport.id)">
           <img class="img-fluid picture m-auto" src="assets/pictures/{{transport.picture}}.svg"/>
           <p class="m-auto text-center">{{transport.label}}</p>
         </div>
@@ -91,7 +91,7 @@
 <ng-template #elseBlockTest>
 <h3>{{mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)}}</h3>
 </ng-template>
+
+
+<app-map *ngIf="selectedOriginCity && selectedDestinationCity" [coord]="selectedDestinationCity.center" [bearing]="mapboxService.calculate_bearing(selectedOriginCity.center, selectedDestinationCity.center)"></app-map>
 -->
-
-<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
-

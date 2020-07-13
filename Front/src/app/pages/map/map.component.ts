@@ -10,7 +10,7 @@ import { MapboxService, Feature} from '../../services/mapbox/mapbox.service'
 export class MapPageComponent implements OnInit {
 
   center : any;
-  constructor(private store : StoreService) {
+  constructor(public store : StoreService) {
     this.center = this.store.selectedDestinationCity.center;
   }
 
