@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
 
   destination : FormGroup;
   origin : FormGroup;
+  destinationCity: FormControl;
+  originCity: FormControl;
 
   selectedFrequency = new FormControl();
 
@@ -64,6 +66,9 @@ frequencies = [
     this.fakeControl = this.formBuilder.group({
       fake : ['',[Validators.required,  Validators.maxLength(100),  Validators.minLength(10)]], 
     });
+
+    this.destination = new FormGroup({destinationCity : new FormControl()});
+    this.origin = new FormGroup({originCity : new FormControl()});
    }
 
   ngAfterViewInit() {
@@ -97,7 +102,7 @@ frequencies = [
 
 
   onSelect(address: string, origin : boolean) {
-    let city = this.cityList.find(city => city.place_name === address);
+    let city = this.cityList.find(city => city.text === address);
     
     if(origin) {
       this.selectedOriginCity = city;

@@ -5,7 +5,7 @@
     <form class="stepper-content" [formGroup]="destination">
       <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
       <div class="search">
-        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..."
+        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..." formControlName="destinationCity"
           [matAutocomplete]="auto" (input)="search($event)">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
@@ -23,7 +23,7 @@
     <form class="stepper-content" [formGroup]="origin">
       <h2 class="text-center">Where do you come from ?</h2>
       <div class="search">
-        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..."
+        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..." formControlName="originCity"
           [matAutocomplete]="auto2" (input)="search($event)">
         <mat-autocomplete #auto2="matAutocomplete">
           <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, true)">
