@@ -28,9 +28,6 @@ export class HomeComponent implements OnInit {
   cities: string[] = []; // List of cities based on partial search string
   cityList: Feature[] = []; // List of city suggestions
 
-  selectedCityOrigin: Feature = null;
-  selectedCityDestination: Feature = null;
-
   value: string;
 
   //destinationControl = new FormControl(); 
@@ -93,7 +90,7 @@ frequencies = [
 
 
   onSelect(address: string, origin : boolean) {
-    let city = this.cityList.find(city => city.place_name === address);
+    let city = this.cityList.find(city => city.text === address);
     
     if(origin) {
       this.store.selectedOriginCity = city;
