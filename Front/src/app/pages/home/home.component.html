@@ -41,9 +41,9 @@
     <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>Transport</ng-template>
       <div class="stepper-content col-10 m-auto">
-        <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How do you transport to your selected city ?</h2>
+        <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlock">How do you transport to your selected city ?</h2>
         <ng-template #elseBlock>
-          <h2 class="text-center">How do you transport to {{selectedCity.text}} ?</h2>
+          <h2 class="text-center">How do you transport to {{store.selectedDestinationCity.text}} ?</h2>
         </ng-template>
           
         <div class="row d-flex justify-content-between">
@@ -53,38 +53,35 @@
           </div>
         </div>
 
-        <button matStepperNext *ngIf="selectedTransport">Next</button>
+        <button matStepperNext *ngIf="store.selectedTransport">Next</button>
       </div>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl" class="m-auto">
       <ng-template matStepLabel>Frequency</ng-template>
       <div class="stepper-content col-10 m-auto">
-        <h2 class="text-center" *ngIf="!selectedCity; else elseBlock">How often do you go to the selected city ?</h2>
+        <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlock">How often do you go to the selected city ?</h2>
         <ng-template #elseBlock>
-          <h2 class="text-center">How often do you go to {{selectedCity.text}} ?</h2>
+          <h2 class="text-center">How often do you go to {{store.selectedDestinationCity.text}} ?</h2>
         </ng-template>
         
         <mat-form-field class="m-auto">
-          <mat-select placeholder="Select a frequency" class="m-auto" [formControl]="selectedFrequency">
+          <mat-select placeholder="Select a frequency" class="m-auto" [formControl]="store.selectedFrequency">
             <mat-option class="align-items-center" *ngFor="let frequency of frequencies" [value]="frequency.id">{{frequency.label}}</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <button matStepperNext *ngIf="selectedFrequency.value">Next</button>
+        <button matStepperNext *ngIf="store.selectedFrequency.value">Next</button>
       </div>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
         <ng-template matStepLabel>Generate</ng-template>
         <div class="stepper-content col-10 m-auto">
-          <button clickclass="btn btn-secondary">Generate my map</button>
+          <button routerLink="/map" (click)="display()" clickclass="btn btn-secondary">Generate my map</button>
         </div>
     </mat-step>
 
 </mat-horizontal-stepper>
 
-<app-map *ngIf="!selectedCity; else elseBlockMap"></app-map>
-<ng-template #elseBlockMap>
-  <app-map [coord]="selectedCity.center"></app-map>
-</ng-template>
+

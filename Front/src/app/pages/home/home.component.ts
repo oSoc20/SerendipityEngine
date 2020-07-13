@@ -6,6 +6,7 @@ import { MapboxService, Feature} from '../../services/mapbox/mapbox.service'
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { Frequency } from 'src/app/utilitaries/frequency-enum';
+import { StoreService } from 'src/app/services/store/store.service';
 
 
 @Component({
@@ -17,17 +18,10 @@ export class HomeComponent implements OnInit {
 
   destination : FormGroup;
   origin : FormGroup;
-
-  selectedFrequency = new FormControl();
-
-  selectedDestinationCity : Feature = null;
-  selectedOriginCity : Feature = null;
   
   control = new FormControl();
   
   fakeControl : FormGroup;
-
-  selectedTransport : Transport;
   
   isLinear = false;
 
@@ -58,7 +52,7 @@ frequencies = [
 
   
 
-  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
+  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, private store : StoreService) {
     this.fakeControl = this.formBuilder.group({
       fake : ['',[Validators.required,  Validators.maxLength(100),  Validators.minLength(10)]], 
     });
@@ -69,7 +63,7 @@ frequencies = [
   }
 
   changeSelectedTransport(value) {
-    this.selectedTransport = value;
+    this.store.selectedTransport = value;
   }
 
   
@@ -96,24 +90,23 @@ frequencies = [
     let city = this.cityList.find(city => city.place_name === address);
     
     if(origin) {
-      this.selectedOriginCity = city;
-      console.log(this.selectedOriginCity);
+      this.store.selectedOriginCity = city;
+      console.log(this.store.selectedOriginCity);
     }
     else {
-      this.selectedDestinationCity = city;
-      console.log(this.selectedDestinationCity);
+      this.store.selectedDestinationCity = city;
+      console.log(this.store.selectedDestinationCity);
     }
 
     this.cities = [];
   }
 
-  /* I let this in comment like this you can know how to access the label of the values #Alexis
+  /* I let this in comment like this you can know how to access the label of the values #Alexis */
   display() {
-    console.log(this.selectedDestinationCity.text);
-    console.log(this.selectedOriginCity.text);
-    console.log(this.selectedTransport);
-    console.log(this.selectedFrequency.value);
+    console.log(this.store.selectedDestinationCity.text);
+    console.log(this.store.selectedOriginCity.text);
+    console.log(this.store.selectedTransport);
+    console.log(this.store.selectedFrequency.value);
   }
-  */
 
 }

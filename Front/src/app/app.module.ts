@@ -13,6 +13,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { MapComponent } from './map/map.component';
+import { StoreService } from './services/store/store.service';
+import { MapPageComponent } from './pages/map/map.component';
 
 
 @NgModule({
@@ -23,8 +25,8 @@ import { MapComponent } from './map/map.component';
     AboutComponent,
     CollectionComponent,
     FooterComponent,
-    //CardComponent,
-    MapComponent
+    MapComponent,
+    MapPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { MapComponent } from './map/map.component';
     ReactiveFormsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
