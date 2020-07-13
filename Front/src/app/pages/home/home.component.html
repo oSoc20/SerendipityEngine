@@ -2,6 +2,7 @@
 
     <mat-step [stepControl]="fakeControl">
         <ng-template matStepLabel>Destination</ng-template>
+
         <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
         <div class="search">
           <input 
@@ -17,10 +18,13 @@
           </mat-autocomplete>
           <button matStepperNext><i class="fa fa-search"></i>Search</button>
           </div>
+
+        </form>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
         <ng-template matStepLabel>City of living</ng-template>
+      <form class="stepper-content" [formGroup]="origin">
         <h2 class="text-center">Where do you come from ?</h2>
         <div class="search">
               <input
@@ -37,6 +41,7 @@
             <button matStepperNext><i class="fa fa-search"></i>Search</button>
         </div>
     </mat-step>
+
 
     <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>Transport</ng-template>
@@ -84,7 +89,12 @@
 
 </mat-horizontal-stepper>
 
-<app-map *ngIf="!selectedCity; else elseBlockMap"></app-map>
-<ng-template #elseBlockMap>
-  <app-map [coord]="selectedCity.center"></app-map>
+<!--
+<h3 *ngIf="!selectedCityOrigin || !selectedCityDestination; else elseBlockTest">TEST</h3>
+<ng-template #elseBlockTest>
+  <h3>{{mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)}}</h3>
 </ng-template>
+-->
+
+<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
+
