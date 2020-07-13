@@ -1,0 +1,4 @@
+<app-map *ngIf="!store.selectedDestinationCity; else elseBlockMap"></app-map>
+<ng-template #elseBlockMap>
+  <app-map [coord]="store.selectedDestinationCity.center"></app-map>
+</ng-template>

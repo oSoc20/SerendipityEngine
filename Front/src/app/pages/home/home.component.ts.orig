@@ -18,13 +18,8 @@ export class HomeComponent implements OnInit {
 
   destination : FormGroup;
   origin : FormGroup;
-  destinationCity: FormControl;
-  originCity: FormControl;
-
-  selectedFrequency = new FormControl();
-
-  selectedDestinationCity : Feature = null;
-  selectedOriginCity : Feature = null;
+  
+  control = new FormControl();
   
   fakeControl : FormGroup;
   
@@ -35,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   selectedCityOrigin: Feature = null;
   selectedCityDestination: Feature = null;
-
+  control = new FormControl();
   value: string;
 
   //destinationControl = new FormControl(); 
@@ -61,13 +56,16 @@ frequencies = [
     { id : Frequency.Always, label : "Always"},
 ]
 
+<<<<<<< HEAD
+  
+
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, private store : StoreService) {
+=======
+  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
+>>>>>>> 7f323423b52d25009ed2400c9e7bdb888561aef5
     this.fakeControl = this.formBuilder.group({
       fake : ['',[Validators.required,  Validators.maxLength(100),  Validators.minLength(10)]], 
     });
-
-    this.destination = new FormGroup({destinationCity : new FormControl()});
-    this.origin = new FormGroup({originCity : new FormControl()});
    }
 
   ngAfterViewInit() {
@@ -101,7 +99,7 @@ frequencies = [
 
 
   onSelect(address: string, origin : boolean) {
-    let city = this.cityList.find(city => city.text === address);
+    let city = this.cityList.find(city => city.place_name === address);
     
     if(origin) {
       this.store.selectedOriginCity = city;

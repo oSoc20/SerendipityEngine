@@ -1,23 +1,30 @@
 <mat-horizontal-stepper id="main-container" class="d-flex align-items-center ml-5 flex-column" [linear]="isLinear" #stepper>
 
-  <mat-step [stepControl]="fakeControl">
-    <ng-template matStepLabel>Destination</ng-template>
-    <form class="stepper-content" [formGroup]="destination">
-      <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
-      <div class="search">
-        <input type="text" class="form-control" placeholder="I think Brussels is a good choice..." formControlName="destinationCity"
-          [matAutocomplete]="auto" (input)="search($event)">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
+    <mat-step [stepControl]="fakeControl">
+        <ng-template matStepLabel>Destination</ng-template>
+
+        <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
+        <div class="search">
+          <input 
+                  type="text"
+                  class="form-control"
+                  placeholder="I think Brussels is a good choice..."
+                  [matAutocomplete]="auto"
+                  (input)="search($event)">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
             {{city}}
             </mat-option>
           </mat-autocomplete>
           <button matStepperNext><i class="fa fa-search"></i>Search</button>
           </div>
+
+        </form>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
         <ng-template matStepLabel>City of living</ng-template>
+      <form class="stepper-content" [formGroup]="origin">
         <h2 class="text-center">Where do you come from ?</h2>
         <div class="search">
               <input
@@ -53,6 +60,7 @@
 
         <button matStepperNext *ngIf="store.selectedTransport">Next</button>
       </div>
+    </mat-step>
 
     <mat-step [stepControl]="fakeControl" class="m-auto">
       <ng-template matStepLabel>Frequency</ng-template>
@@ -81,13 +89,15 @@
 
 </mat-horizontal-stepper>
 
+<<<<<<< HEAD
+=======
 <!--
 <h3 *ngIf="!selectedCityOrigin || !selectedCityDestination; else elseBlockTest">TEST</h3>
 <ng-template #elseBlockTest>
   <h3>{{mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)}}</h3>
 </ng-template>
+-->
 
+<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center" [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
+>>>>>>> 7f323423b52d25009ed2400c9e7bdb888561aef5
 
-<app-map *ngIf="selectedCityOrigin && selectedCityDestination" [coord]="selectedCityDestination.center"
-  [bearing]="mapboxService.calculate_bearing(selectedCityOrigin.center, selectedCityDestination.center)"></app-map>
-  -->
