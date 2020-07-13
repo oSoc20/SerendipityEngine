@@ -60,7 +60,7 @@ frequencies = [
     { id : Frequency.Usually, label : "Usually"},
     { id : Frequency.NearlyAlways, label : "Nearly always"},
     { id : Frequency.Always, label : "Always"},
-
+]
 
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
     this.fakeControl = this.formBuilder.group({
