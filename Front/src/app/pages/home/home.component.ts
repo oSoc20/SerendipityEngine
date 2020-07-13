@@ -26,13 +26,57 @@ export class HomeComponent implements OnInit {
   
   cities: string[] = []; // List of cities based on partial search string
   cityList: Feature[] = []; // List of city suggestions
-  selectedCityOrigin: Feature = null;
+  //selectedCityOrigin: Feature = null;
+  selectedCityOrigin: Feature = {
+    "id": "place.4343180545953150",
+    "type": "Feature",
+    "place_type": [
+        "place"
+    ],
+    "relevance": 1,
+    "properties": {
+        "wikidata": "Q228863"
+    },
+    "text": "Zulte",
+    "place_name": "Zulte, East Flanders, Belgium",
+    "bbox": [
+        3.415547,
+        50.896947,
+        3.527883,
+        50.983599
+    ],
+    "center": [
+        3.4485632,
+        50.9206638
+    ],
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            3.4485632,
+            50.9206638
+        ]
+    },
+    "context": [
+        {
+            "id": "region.6677865445789420",
+            "short_code": "BE-VOV",
+            "wikidata": "Q1114",
+            "text": "East Flanders"
+        },
+        {
+            "id": "country.1494593798110250",
+            "wikidata": "Q31",
+            "short_code": "be",
+            "text": "Belgium"
+        }
+    ]
+  };
   selectedCityDestination: Feature = null;
   control = new FormControl();
   value: string;
 
-  destinationControl = new FormControl(); 
-  originControl;
+  //destinationControl = new FormControl(); 
+  //originControl;
 
   transports = [
     { id : Transport.Car, label : "by car",  picture : "car" },
@@ -92,14 +136,14 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onSelectOrigin(place: string) {
+  onSelectOrigin(place: string, origin: boolean) {
     this.selectedCityOrigin = this.cityList.find(city => city.text === place);
     console.log("origin", this.selectedCityOrigin);
-    console.log("value", this.value);
+
     this.cities = [];
   }
 
-  onSelectDestination(place: string) {
+  onSelectDestination(place: string, origin: boolean) {
     this.selectedCityDestination = this.cityList.find(city => city.text === place);
     console.log("destination", this.selectedCityDestination);
     
