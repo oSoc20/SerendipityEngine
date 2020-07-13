@@ -17,8 +17,11 @@ export class HomeComponent implements OnInit {
 
   destination : FormGroup;
   origin : FormGroup;
-  selectedCity: Feature = null;
+
   selectedFrequency = new FormControl();
+
+  selectedDestinationCity : Feature = null;
+  selectedOriginCity : Feature = null;
   
   control = new FormControl();
   
@@ -56,17 +59,9 @@ frequencies = [
   
 
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
-    this.fakeControl = this.formBuilder.group({});
-    this.destination = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
-    });
-    this.origin = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
-    });
     this.fakeControl = this.formBuilder.group({
-      fake: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
-    })
-
+      fake : ['',[Validators.required,  Validators.maxLength(100),  Validators.minLength(10)]], 
+    });
    }
 
   ngAfterViewInit() {
@@ -97,10 +92,28 @@ frequencies = [
     }
   }
 
-  onSelect(address: string) {
-    this.selectedCity = this.cityList.find(city => city.place_name === address);
-    console.log(this.selectedCity);
+  onSelect(address: string, origin : boolean) {
+    let city = this.cityList.find(city => city.place_name === address);
+    
+    if(origin) {
+      this.selectedOriginCity = city;
+      console.log(this.selectedOriginCity);
+    }
+    else {
+      this.selectedDestinationCity = city;
+      console.log(this.selectedDestinationCity);
+    }
+
     this.cities = [];
   }
+
+  /* I let this in comment like this you can know how to access the label of the values #Alexis
+  display() {
+    console.log(this.selectedDestinationCity.text);
+    console.log(this.selectedOriginCity.text);
+    console.log(this.selectedTransport);
+    console.log(this.selectedFrequency.value);
+  }
+  */
 
 }

@@ -1,49 +1,41 @@
 <mat-horizontal-stepper id="main-container" class="d-flex align-items-center ml-5 flex-column" [linear]="isLinear" #stepper>
 
     <mat-step [stepControl]="fakeControl">
-      <form [formGroup]="destination">
         <ng-template matStepLabel>Destination</ng-template>
-            <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
-            <div class="search">
-              <input 
-                      formControlName="city"
-                      type="text"
-                      id="title"
-                      class="form-control"
-                      placeholder="I think Brussels is a good choice..."
-                      [matAutocomplete]="auto"
-                      (input)="search($event)">
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city)">
-              {{city}}
-              </mat-option>
-            </mat-autocomplete>
-          <button type="submit" matStepperNext><i class="fa fa-search"></i>Search</button>
+        <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
+        <div class="search">
+          <input 
+                  type="text"
+                  class="form-control"
+                  placeholder="I think Brussels is a good choice..."
+                  [matAutocomplete]="auto"
+                  (input)="search($event)">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, false)">
+            {{city}}
+            </mat-option>
+          </mat-autocomplete>
+          <button matStepperNext><i class="fa fa-search"></i>Search</button>
           </div>
-      </form>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
-      <form [formGroup]="origin">
         <ng-template matStepLabel>City of living</ng-template>
-              <h2 class="text-center">Where do you come from ?</h2>
-              <div class="search">
-                <input
-                       formControlName="city"
-                       type="text"
-                       id="title"
-                       class="form-control"
-                       placeholder="I think Brussels is a good choice..."
-                       [matAutocomplete]="auto"
-                       (input)="search($event)">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city)">
+        <h2 class="text-center">Where do you come from ?</h2>
+        <div class="search">
+              <input
+                    type="text"
+                    class="form-control"
+                    placeholder="I think Brussels is a good choice..."
+                    [matAutocomplete]="auto2"
+                    (input)="search($event)">
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option *ngFor="let city of cities" [value]="city" (click)="onSelect(city, true)">
                 {{city}}
                 </mat-option>
               </mat-autocomplete>
-            <button type="submit" matStepperNext><i class="fa fa-search"></i>Search</button>
-            </div>
-      </form>
+            <button matStepperNext><i class="fa fa-search"></i>Search</button>
+        </div>
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
@@ -84,12 +76,10 @@
     </mat-step>
 
     <mat-step [stepControl]="fakeControl">
-      <form [formGroup]="fourthFormGroup">
         <ng-template matStepLabel>Generate</ng-template>
         <div class="stepper-content col-10 m-auto">
-          <button class="btn btn-secondary">Generate my map</button>
+          <button clickclass="btn btn-secondary">Generate my map</button>
         </div>
-      </form>
     </mat-step>
 
 </mat-horizontal-stepper>
