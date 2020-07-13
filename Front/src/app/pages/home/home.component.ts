@@ -33,9 +33,6 @@ export class HomeComponent implements OnInit {
   cities: string[] = []; // List of cities based on partial search string
   cityList: Feature[] = []; // List of city suggestions
 
-  selectedCityOrigin: Feature = null;
-  selectedCityDestination: Feature = null;
-
   value: string;
 
   //destinationControl = new FormControl(); 
