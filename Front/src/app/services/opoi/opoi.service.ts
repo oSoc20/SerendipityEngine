@@ -25,4 +25,14 @@ export class OpoiService {
     console.log(this.tiles);
   }
 
+  /*
+    "hydra:variable": "x", "hydra:property": "tiles:longitudeTile"
+    "hydra:variable": "y", "hydra:property": "tiles:latitudeTile"
+    "hydra:variable": "z", "hydra:property": "tiles:zoom"
+    https://opoi.org/{z}/{x}/{y}
+  */
+  getUrl(long, lat, zoom) {
+    return `https://opoi.org/${zoom}/${long}/${lat}`;
+  }
+
 }
