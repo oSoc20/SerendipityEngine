@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StoreService } from '../store/store.service';
-import * as t from "../../../../node_modules/tiles-in-bbox/index.js";
+import * as t from "../../../../node_modules/tiles-in-bbox";
 //var t = require('tiles-in-bbox')
  
 @Injectable({
@@ -8,21 +8,21 @@ import * as t from "../../../../node_modules/tiles-in-bbox/index.js";
 })
 export class OpoiService {
 
-  // bbox = {
-  //   bottom : 42.356,
-  //   left : -71.1279,
-  //   top : 42.3876,
-  //   right : -71.1002
-  // };
-  zoom = 15;
-  tiles;
+  bbox = {
+    bottom: 4.313869,
+    left: 50.796245,
+    right: 50.913716,
+    top: 4.437046
+  };
+  zoom = 14;
+  tiles: [];
 
   constructor(public store : StoreService) { }
 
   //Follows the GeoJson/OpenStreetMaps convention of a clockwise box starting at the bottom.
   calculateTiles() {
-    this.tiles = t.tilesInBbox(this.store.selectedDestinationCity.bbox, this.zoom);
-    console.log(this.tiles);
+    this.tiles = t.tilesInBbox(this.getBbox(), this.zoom);
+    console.log("tiles:", this.tiles);
   }
 
   /*
@@ -42,7 +42,17 @@ export class OpoiService {
   }
 
   lat2tile(lat,zoom)  { 
-    return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 * Math.pow(2,zoom))); 
+    return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 * Math.pow(2,zoom)));
+  }
+  
+  getBbox() {
+    var bbox: number[] = this.store.selectedDestinationCity.bbox;
+
+    return {
+      bottom: bbox[0],
+      left: bbox[1],
+      top : bbox[2],
+      right: bbox[3]
+    };
   }
 
-}
