@@ -36,7 +36,7 @@ export class OpoiService {
   }
 
   getBbox() {
-    var bbox = this.store.selectedDestinationCity.bbox;
+    var bbox: number[] = this.store.selectedDestinationCity.bbox;
 
     return {
       bottom: bbox[0],
