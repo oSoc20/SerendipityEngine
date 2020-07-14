@@ -31,8 +31,18 @@ export class OpoiService {
     "hydra:variable": "z", "hydra:property": "tiles:zoom"
     https://opoi.org/{z}/{x}/{y}
   */
-  getUrl(long, lat, zoom) {
+  getUrl(longitude, latitude, zoom) {
+    let long = this.long2tile(longitude, zoom);
+    let lat = this.lat2tile(latitude, zoom);
     return `https://opoi.org/${zoom}/${long}/${lat}`;
+  }
+
+  long2tile(lon,zoom) { 
+    return (Math.floor((lon+180)/360*Math.pow(2,zoom))); 
+  }
+
+  lat2tile(lat,zoom)  { 
+    return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 * Math.pow(2,zoom))); 
   }
 
 }
