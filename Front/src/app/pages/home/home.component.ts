@@ -88,7 +88,7 @@ frequencies = [
         .search_word(searchTerm)
         .subscribe((features: Feature[]) => {
           //this.cities = features.map(feat => feat.place_name);
-          this.cities = features.map(feat => feat.text);
+          //this.cities = features.map(feat => feat.text);
           this.cityList = features;
         });
     }
@@ -98,8 +98,8 @@ frequencies = [
   }
 
 
-  onSelect(address: string, origin : boolean) {
-    let city = this.cityList.find(city => city.text === address);
+  onSelect(address, origin : boolean) {
+    let city = this.cityList.find(city => city.text === address.text);
     
     if(origin) {
       this.store.selectedOriginCity = city;
@@ -119,6 +119,10 @@ frequencies = [
     console.log(this.store.selectedOriginCity.text);
     console.log(this.store.selectedTransport);
     console.log(this.store.selectedFrequency.value);
+  }
+
+  getDisplayName(city: any) {
+    return city.text + ", " + city.place_name.split(',').pop();
   }
 
 }
