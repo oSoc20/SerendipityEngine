@@ -3,7 +3,7 @@ nav {
     padding: 1%;
 }
 nav a {
-    color : #63918A;
+    color : grey;
 }
 
 
@@ -11,7 +11,7 @@ a.navbar-brand {
     color:white;
 }
 nav a:hover {
-    color : white;
+    color : #8c00ff;
     cursor: pointer;
 }
 
