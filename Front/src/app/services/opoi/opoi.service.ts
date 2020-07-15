@@ -59,9 +59,6 @@ export class OpoiService {
   requestTile(tile) {
     const url = this.getUrl(tile.x, tile.y, tile.z);
     return this.http.get(url);
-      // .pipe(map((res) => {
-      //   return res;
-      // }));
   }
 
   requestTiles() {
@@ -72,6 +69,16 @@ export class OpoiService {
 
   requestTileTest() {
     this.requestTile(this.tiles[0]).subscribe(results => {console.log(results)});
+  }
+
+  // @type: "schema:Museum"
+  requestMuseum() {
+    var museum: object[] = [];
+    this.requestTile(this.tiles[0]).subscribe(result => 
+      {
+        museum.concat(result["@graph"].filter(res => res["@type"] === "schema:Museum"))
+      });
+    console.log("museum: ", museum);
   }
 
 }

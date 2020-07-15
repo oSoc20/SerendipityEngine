@@ -30,6 +30,7 @@ export class MapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
     this.opoi.requestTileTest();
+    this.opoi.requestMuseum();
   }
 
 }
