@@ -41,10 +41,10 @@ export class OpoiService {
     var bbox: number[] = this.store.selectedDestinationCity.bbox;
 
     return {
-      bottom: bbox[0],
-      left: bbox[1],
-      top : bbox[2],
-      right: bbox[3]
+      left: bbox[0],
+      bottom: bbox[1],
+      right : bbox[2],
+      top: bbox[3]
     };
   }
 
