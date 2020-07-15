@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { StoreService } from '../store/store.service';
 import * as t from "../../../../node_modules/tiles-in-bbox";
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 //var t = require('tiles-in-bbox')
  
 @Injectable({
@@ -15,9 +17,9 @@ export class OpoiService {
     top: 4.437046
   };
   zoom = 14;
-  tiles: [];
+  tiles: object[];
 
-  constructor(public store : StoreService) { }
+  constructor(public store : StoreService, private http: HttpClient) { }
 
   //Follows the GeoJson/OpenStreetMaps convention of a clockwise box starting at the bottom.
   calculateTiles() {
@@ -31,8 +33,8 @@ export class OpoiService {
     "hydra:variable": "z", "hydra:property": "tiles:zoom"
     https://opoi.org/{z}/{x}/{y}
   */
-  getUrl(long, lat, zoom) {
-    return `https://opoi.org/${zoom}/${long}/${lat}`;
+  getUrl(x, y, z) {
+    return `https://opoi.org/${z}/${x}/${y}`;
   }
 
   getBbox() {
@@ -44,6 +46,24 @@ export class OpoiService {
       top : bbox[2],
       right: bbox[3]
     };
+  }
+
+  requestTile(tile) {
+    const url = this.getUrl(tile.x, tile.y, tile.z);
+    return this.http.get(url);
+      // .pipe(map((res) => {
+      //   return res;
+      // }));
+  }
+
+  requestTiles() {
+    for(var i = 0; i < this.tiles.length; i++) {
+      this.requestTile(this.tiles[i]);
+    }
+  }
+
+  requestTileTest() {
+    this.requestTile(this.tiles[0]).subscribe(results => {console.log(results)});
   }
 
 }
