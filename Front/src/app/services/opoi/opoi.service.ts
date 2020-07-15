@@ -3,6 +3,7 @@ import { StoreService } from '../store/store.service';
 import * as t from "../../../../node_modules/tiles-in-bbox";
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { forkJoin, Observable } from 'rxjs';
 //var t = require('tiles-in-bbox')
  
 @Injectable({
@@ -62,10 +63,24 @@ export class OpoiService {
   }
 
   requestTiles() {
-    for(var i = 0; i < this.tiles.length; i++) {
-      this.requestTile(this.tiles[i]);
-    }
+    var requestArray: Observable<Object>[] = [];
+    this.tiles.map(tile => {
+      requestArray.push(this.requestTile(tile));
+    })
+    
+    return forkJoin(...requestArray);
   }
+
+  /*
+  requestTiles() {
+    var responseArray: object[] = [];
+    this.tiles.map(tile => {
+      this.requestTile(tile).subscribe(response => responseArray.concat(response));
+    })
+    
+    return responseArray;
+  }
+  */
 
   requestTileTest() {
     this.requestTile(this.tiles[0]).subscribe(results => {console.log(results)});
@@ -74,11 +89,17 @@ export class OpoiService {
   // @type: "schema:Museum"
   requestMuseum() {
     var museum: object[] = [];
-    this.requestTile(this.tiles[0]).subscribe(result => 
-      {
-        museum.concat(result["@graph"].filter(res => res["@type"] === "schema:Museum"))
-      });
-    console.log("museum: ", museum);
+    this.requestTiles().subscribe(res => {
+      //console.log(res);
+      res.map(result => 
+        {
+          //console.log("result: ", result["@graph"].filter(res => res["@type"] === "schema:Museum"));
+          var museums: Object[] = result["@graph"].filter(res => res["@type"] === "schema:Museum");
+          museum = museum.concat(museums);
+        });
+      console.log("museum: ", museum);
+      return museum;
+    });
   }
 
 }
