@@ -102,4 +102,20 @@ export class OpoiService {
     });
   }
 
+  // @type: "schema:Museum"
+  requestType(type: string) {
+    var result: object[] = [];
+    this.requestTiles().subscribe(res => {
+      //console.log(res);
+      res.map(response => 
+        {
+          //console.log("result: ", result["@graph"].filter(res => res["@type"] === "schema:Museum"));
+          var filtered: Object[] = response["@graph"].filter(res => res["@type"] === type);
+          result = result.concat(filtered);
+        });
+      console.log("result " + type + ": ", result);
+      return result;
+    });
+  }
+
 }

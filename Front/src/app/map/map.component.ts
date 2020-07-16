@@ -31,6 +31,7 @@ export class MapComponent implements OnInit {
     this.opoi.calculateTiles();
     //this.opoi.requestTileTest();
     this.opoi.requestMuseum();
+    this.opoi.requestType("schema:CatholicChurch");
   }
 
 }
