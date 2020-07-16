@@ -82,9 +82,9 @@ export class OpoiService {
   }
   */
 
-  requestTileTest() {
-    this.requestTile(this.tiles[0]).subscribe(results => {console.log(results)});
-  }
+  // requestTileTest() {
+  //   this.requestTile(this.tiles[0]).subscribe(results => {console.log(results)});
+  // }
 
   // @type: "schema:Museum"
   requestMuseum() {
