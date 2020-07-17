@@ -49,13 +49,8 @@ export class HomeComponent implements OnInit {
 
 frequencies = [
     { id : Frequency.Never, label : "Never"},
-    { id : Frequency.HardlyNever, label : "Hardly never"},
     { id : Frequency.Sometimes, label : "Sometimes"},
     { id : Frequency.Often, label : "Often"},
-    { id : Frequency.Frequently, label : "Frequently"},
-    { id : Frequency.Usually, label : "Usually"},
-    { id : Frequency.NearlyAlways, label : "Nearly always"},
-    { id : Frequency.Always, label : "Always"},
 ]
 
   constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, public store : StoreService) {
