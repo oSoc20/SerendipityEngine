@@ -32,4 +32,10 @@ export class MapComponent implements OnInit {
     this.opoi.requestType("schema:CatholicChurch");
   }
 
+  rotateMap(bearingAngle) {
+    this.bearing += bearingAngle;
+    this.bearing %= 360;
+    this.map.setBearing(this.bearing);
+  }
+
 }
