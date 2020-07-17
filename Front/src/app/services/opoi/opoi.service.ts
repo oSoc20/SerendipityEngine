@@ -71,36 +71,19 @@ export class OpoiService {
     return forkJoin(...requestArray);
   }
 
-  /*
-  requestTiles() {
-    var responseArray: object[] = [];
-    this.tiles.map(tile => {
-      this.requestTile(tile).subscribe(response => responseArray.concat(response));
-    })
-    
-    return responseArray;
-  }
-  */
-
-  // requestTileTest() {
-  //   this.requestTile(this.tiles[0]).subscribe(results => {console.log(results)});
+  // // @type: "schema:Museum"
+  // requestMuseum() {
+  //   var museum: object[] = [];
+  //   this.requestTiles().subscribe(res => {
+  //     res.map(result => 
+  //       {
+  //         var museums: Object[] = result["@graph"].filter(res => res["@type"] === "schema:Museum");
+  //         museum = museum.concat(museums);
+  //       });
+  //     console.log("museum: ", museum);
+  //     return museum;
+  //   });
   // }
-
-  // @type: "schema:Museum"
-  requestMuseum() {
-    var museum: object[] = [];
-    this.requestTiles().subscribe(res => {
-      //console.log(res);
-      res.map(result => 
-        {
-          //console.log("result: ", result["@graph"].filter(res => res["@type"] === "schema:Museum"));
-          var museums: Object[] = result["@graph"].filter(res => res["@type"] === "schema:Museum");
-          museum = museum.concat(museums);
-        });
-      console.log("museum: ", museum);
-      return museum;
-    });
-  }
 
   // @type: "schema:Museum"
   requestType(type: string) {
