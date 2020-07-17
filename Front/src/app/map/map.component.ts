@@ -26,6 +26,7 @@ export class MapComponent implements OnInit {
         pitch: 0,//60, // pitch in degrees
         bearing: this.bearing, // bearing in degrees
     });
+    
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
@@ -33,8 +34,8 @@ export class MapComponent implements OnInit {
   }
 
   exportMap() {
-    console.log(this.map.getCanvas().toDataURL("image/png"))
-    var img = this.map.getCanvas().toDataURL("image/png"); //document.getElementById("map")
+    console.log(this.map.getCanvas().toDataURL())
+    var img = this.map.getCanvas().toDataURL(); //document.getElementById("map") "image/png"
     //document.write('<img src="'+ img +'"/>');
     var link = document.createElement('a');
     link.download = 'filename.png';
