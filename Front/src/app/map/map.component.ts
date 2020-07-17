@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
+import { OpoiService } from '../services/opoi/opoi.service';
 
 @Component({
   selector: 'app-map',
@@ -13,7 +14,7 @@ export class MapComponent implements OnInit {
   @Input() coord = [4.351710, 50.850340]; //long, lat
   @Input() bearing: number = 0; //angle
 
-  constructor() { }
+  constructor(private opoi: OpoiService) { }
 
   ngOnInit() {
     (mapboxgl as any).accessToken = environment.mapbox.accessToken; // dirty 'accessToken read-only' workaround see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
@@ -27,6 +28,8 @@ export class MapComponent implements OnInit {
     });
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
+    this.opoi.calculateTiles();
+    this.opoi.requestType("schema:CatholicChurch");
   }
 
 }
