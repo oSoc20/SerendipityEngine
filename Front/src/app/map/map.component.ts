@@ -11,12 +11,15 @@ import { OpoiService } from '../services/opoi/opoi.service';
 export class MapComponent implements OnInit {
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
-  @Input() coord = [4.351710, 50.850340]; //long, lat
-  @Input() bearing: number = 0; //angle
+  @Input() city: any;
+  coord: number[] = [4.351710, 50.850340]; //long, lat
+  bearing: number = 0; //angle
 
   constructor(private opoi: OpoiService) { }
 
   ngOnInit() {
+    this.coord = this.city.center;
+    console.log("testje", this.city);
     (mapboxgl as any).accessToken = environment.mapbox.accessToken; // dirty 'accessToken read-only' workaround see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
       this.map = new mapboxgl.Map({
         container: 'map',
@@ -26,7 +29,7 @@ export class MapComponent implements OnInit {
         pitch: 0,//60, // pitch in degrees
         bearing: this.bearing, // bearing in degrees
     });
-    
+
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
@@ -41,6 +44,13 @@ export class MapComponent implements OnInit {
     link.download = 'filename.png';
     link.href = img;//document.getElementById('canvas').toDataURL()
     link.click();
+  }
+
+  fitMap() {
+    var offset = 0.035;
+    var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
+    var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
+    this.map.fitBounds([p1, p2]);
   }
 
 }
