@@ -32,4 +32,14 @@ export class MapComponent implements OnInit {
     this.opoi.requestType("schema:CatholicChurch");
   }
 
+  exportMap() {
+    console.log(this.map.getCanvas().toDataURL("image/png"))
+    var img = this.map.getCanvas().toDataURL("image/png"); //document.getElementById("map")
+    //document.write('<img src="'+ img +'"/>');
+    var link = document.createElement('a');
+    link.download = 'filename.png';
+    link.href = img;//document.getElementById('canvas').toDataURL()
+    link.click();
+  }
+
 }
