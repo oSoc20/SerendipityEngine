@@ -98,11 +98,11 @@ frequencies = [
     
     if(origin) {
       this.store.selectedOriginCity = city;
-      console.log(this.store.selectedOriginCity);
+      //console.log(this.store.selectedOriginCity);
     }
     else {
       this.store.selectedDestinationCity = city;
-      console.log(this.store.selectedDestinationCity);
+      //console.log(this.store.selectedDestinationCity);
     }
 
     this.cities = [];
