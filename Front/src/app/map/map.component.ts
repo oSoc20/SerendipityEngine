@@ -55,6 +55,10 @@ export class MapComponent implements OnInit {
     link.click();
   }
 
-  
+  rotateMap(bearingAngle) {
+    this.bearing += bearingAngle;
+    this.bearing %= 360;
+    this.map.setBearing(this.bearing);
+  }
 
 }
