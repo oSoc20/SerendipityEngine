@@ -14,7 +14,7 @@ import { convertPdfToPng } from 'convert-pdf-png';
 })
 export class MapComponent implements OnInit {
   map: mapboxgl.Map;
-  style = 'mapbox://styles/mapbox/streets-v11';
+  style = 'mapbox://styles/occidomoney/ckcu9tdng3kmj1jnrb68j3ly9';
   @Input() city: any;
   coord: number[] = [4.351710, 50.850340]; //long, lat
   bearing: number = 0; //angle
