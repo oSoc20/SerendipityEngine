@@ -111,7 +111,7 @@ export class OpoiService {
           var filtered: Object[] = response["@graph"].filter(res => res["@type"] === type);
           result = result.concat(filtered);
         });
-      console.log("result " + type + ": ", result);
+      //console.log("result " + type + ": ", result);
       return result;
     });
   }
