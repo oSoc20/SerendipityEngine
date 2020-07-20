@@ -17,9 +17,16 @@ export class MapComponent implements OnInit {
 
   constructor(private opoi: OpoiService) { }
 
+  fitMap() {
+    var offset = 0.035;
+    var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
+    var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
+    this.map.fitBounds([p1, p2]);
+  }
+
   ngOnInit() {
     this.coord = this.city.center;
-    console.log("testje", this.city);
+
     (mapboxgl as any).accessToken = environment.mapbox.accessToken; // dirty 'accessToken read-only' workaround see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
       this.map = new mapboxgl.Map({
         container: 'map',
@@ -29,6 +36,8 @@ export class MapComponent implements OnInit {
         pitch: 0,//60, // pitch in degrees
         bearing: this.bearing, // bearing in degrees
     });
+
+    this.map.on('load', () => this.fitMap());
 
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
@@ -46,11 +55,6 @@ export class MapComponent implements OnInit {
     link.click();
   }
 
-  fitMap() {
-    var offset = 0.035;
-    var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
-    var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
-    this.map.fitBounds([p1, p2]);
-  }
+  
 
 }
