@@ -98,11 +98,11 @@ frequencies = [
     
     if(origin) {
       this.store.selectedOriginCity = city;
-      console.log(this.store.selectedOriginCity);
+      //console.log(this.store.selectedOriginCity);
     }
     else {
       this.store.selectedDestinationCity = city;
-      console.log(this.store.selectedDestinationCity);
+      //console.log(this.store.selectedDestinationCity);
     }
 
     this.cities = [];
@@ -110,10 +110,11 @@ frequencies = [
 
   /* I let this in comment like this you can know how to access the label of the values #Alexis */
   display() {
-    console.log(this.store.selectedDestinationCity.text);
-    console.log(this.store.selectedOriginCity.text);
-    console.log(this.store.selectedTransport);
-    console.log(this.store.selectedFrequency.value);
+    console.log("selectedDestinationCity: ",this.store.selectedDestinationCity.text, "\n",
+                "selectedOriginCity: ", this.store.selectedOriginCity.text, "\n",
+                "selectedTransport: ", this.store.selectedTransport, "\n",
+                "selectedFrequency", this.store.selectedFrequency.value
+    );
   }
 
   getDisplayName(city: any) {

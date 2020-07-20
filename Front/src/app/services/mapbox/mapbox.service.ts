@@ -14,8 +14,8 @@ export interface Feature {
   properties: string;
   text: string;
   place_name: string;
-  bbox: [];
-  center: [];
+  bbox: number[];
+  center: number[];
 }
 
 @Injectable({
