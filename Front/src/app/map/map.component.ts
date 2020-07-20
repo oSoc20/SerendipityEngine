@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { OpoiService } from '../services/opoi/opoi.service';
+import { MapboxService } from '../services/mapbox/mapbox.service';
+import { StoreService } from '../services/store/store.service';
 
 @Component({
   selector: 'app-map',
@@ -15,14 +17,11 @@ export class MapComponent implements OnInit {
   coord: number[] = [4.351710, 50.850340]; //long, lat
   bearing: number = 0; //angle
 
-  constructor(private opoi: OpoiService) { }
-
-  fitMap() {
-    var offset = 0.035;
-    var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
-    var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
-    this.map.fitBounds([p1, p2]);
-  }
+  constructor(
+    private opoi: OpoiService,
+    private mapboxService: MapboxService,
+    public store : StoreService,
+  ) { }
 
   ngOnInit() {
     this.coord = this.city.center;
@@ -37,7 +36,13 @@ export class MapComponent implements OnInit {
         bearing: this.bearing, // bearing in degrees
     });
 
-    this.map.on('load', () => this.fitMap());
+    this.map.on('load', () => {
+      this.fitMap();
+      this.bearing = this.mapboxService.calculate_bearing(this.store.selectedDestinationCity.center, this.store.selectedOriginCity.center);
+      this.bearing += 180;
+      this.bearing %= 360;
+      this.map.setBearing(this.bearing);
+    });
 
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
@@ -59,6 +64,14 @@ export class MapComponent implements OnInit {
     this.bearing += bearingAngle;
     this.bearing %= 360;
     this.map.setBearing(this.bearing);
+  }
+
+  fitMap() {
+    var offset = 0.035;
+    var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
+    var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
+    this.map.fitBounds([p1, p2]);
+    this.bearing = 0;
   }
 
 }
