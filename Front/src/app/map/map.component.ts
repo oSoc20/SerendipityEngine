@@ -2,6 +2,10 @@ import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { OpoiService } from '../services/opoi/opoi.service';
+import * as jsPDF from 'jspdf'
+import { StoreService } from '../services/store/store.service';
+import { convertPdfToPng } from 'convert-pdf-png';
+
 
 @Component({
   selector: 'app-map',
@@ -15,7 +19,7 @@ export class MapComponent implements OnInit {
   coord: number[] = [4.351710, 50.850340]; //long, lat
   bearing: number = 0; //angle
 
-  constructor(private opoi: OpoiService) { }
+  constructor(private opoi: OpoiService, private store : StoreService) { }
 
   fitMap() {
     var offset = 0.035;
@@ -47,15 +51,39 @@ export class MapComponent implements OnInit {
   }
 
   exportMap() {
-    console.log(this.map.getCanvas())
-    console.log(this.map.getCanvas().toDataURL())
+
     var img = this.map.getCanvas().toDataURL(); //document.getElementById("map") "image/png"
-    //document.write('<img src="'+ img +'"/>');
-    var link = document.createElement('a');
-    link.download = 'filename.png';
-    link.href = img;//document.getElementById('canvas').toDataURL()
-    link.click();
+
+    var doc = new jsPDF('landscape')
+    doc.setFont("Playfair Display")
+    doc.setFontSize(40)
+    doc.text(this.store.selectedDestinationCity.text, 148.5, 25, 'center'); 
+    doc.setFontSize(20)
+    doc.setLineWidth(4)
+    doc.setDrawColor(81,21,170)
+    doc.rect(40, 45, 220, 130)
+
+
+    doc.text(this.store.selectedDestinationCity.place_name.split(',').pop(), 148.5, 35, 'center'); 
+    doc.addImage(img, 'PNG', 40, 45, 220, 130)
+    doc.setFontSize(8)
+    doc.text(200, 170, "map data © OpenStreetMap contributors")
+
+    doc.setFontSize(40)
+    doc.setFontType('italic')
+    doc.setFontSize(15)
+    doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
+
+
+    doc.save("test.pdf")
+    
+    //doc.save('mymentalmap.pdf')
+
+    
+
   }
+
+  
 
   rotateMap(bearingAngle) {
     this.bearing += bearingAngle;
@@ -63,4 +91,7 @@ export class MapComponent implements OnInit {
     this.map.setBearing(this.bearing);
   }
 
+
+  
 }
+
