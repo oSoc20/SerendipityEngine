@@ -51,8 +51,15 @@ export class MapComponent implements OnInit {
     this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
     this.opoi.requestType("schema:Museum").then(res => {
       console.log("schema:Museum:", res);
-      var coords = this.getCoords(res[0]["asWKT"]);
-      this.addMarker(coords);
+      var temp = res.filter(value => value["asWKT"].includes("POINT"));
+      var amount = temp.length >= 4? 4: temp.length;
+      temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
+      temp.map(poi => {
+        console.log("Adding POI")
+        var coords = this.getCoords(poi["asWKT"]);
+        this.addMarker(coords);
+      })
+      
     });
   }
 
