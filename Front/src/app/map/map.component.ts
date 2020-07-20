@@ -35,6 +35,7 @@ export class MapComponent implements OnInit {
         center: [this.coord[0], this.coord[1]],
         pitch: 0,//60, // pitch in degrees
         bearing: this.bearing, // bearing in degrees
+        preserveDrawingBuffer:true
     });
 
     this.map.on('load', () => this.fitMap());
@@ -46,6 +47,7 @@ export class MapComponent implements OnInit {
   }
 
   exportMap() {
+    console.log(this.map.getCanvas())
     console.log(this.map.getCanvas().toDataURL())
     var img = this.map.getCanvas().toDataURL(); //document.getElementById("map") "image/png"
     //document.write('<img src="'+ img +'"/>');
