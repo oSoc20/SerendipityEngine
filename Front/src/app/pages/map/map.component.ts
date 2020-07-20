@@ -15,7 +15,7 @@ export class MapPageComponent implements OnInit {
   }
 
   ngOnInit() { 
-    console.log("ALexis");   
+    
   }
 
 }
