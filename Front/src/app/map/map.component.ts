@@ -47,7 +47,9 @@ export class MapComponent implements OnInit {
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
-    this.opoi.requestType("schema:CatholicChurch");
+    //this.opoi.requestType("schema:CatholicChurch");
+    this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("TEST_Church:", res)});
+    this.opoi.requestType("schema:Museum").then(res => {console.log("TEST:", res)});
   }
 
   exportMap() {
