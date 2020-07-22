@@ -60,19 +60,27 @@ export class MapComponent implements OnInit {
       temp.map(poi => {
         console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        this.addMarker(coords);
+        this.addMarker(coords, "museum");
       })
       
     });
     this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
       console.log("taginfo:tourism=attraction", res);
-      var temp = res.filter(value => value["asWKT"].includes("POINT"));
+      var temp = res.filter(value => value["asWKT"] && value["name"]);
       var amount = temp.length >= 4? 4: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
         console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        this.addMarker(coords);
+        
+        console.log(poi["name"]);
+        if (Array.isArray(poi["name"])) {
+          var arr: string[] = poi["name"];
+          this.addMarker(coords, arr[0].split(" - ")[0]);//poi[name][0]);
+        }
+        else {
+          this.addMarker(coords, poi["name"]);
+        }
       })
       
     });
@@ -123,8 +131,15 @@ export class MapComponent implements OnInit {
     this.bearing = 0;
   }
 
-  addMarker(coord: number[]) {
-    new mapboxgl.Marker()
+  addMarker(coord: number[], text: string) {
+    var el = document.createElement('div');
+    el.className = 'marker';
+    //el.style.backgroundImage =  "";
+    el.innerHTML = "<b>" + text + "</b>";
+    el.style.width = '60 px';
+    el.style.height = ' 60 px';
+
+    new mapboxgl.Marker(el)
       //.setLngLat({ lng: this.coord[0], lat: this.coord[1] })
       .setLngLat({ lng: coord[0], lat: coord[1] })
       .addTo(this.map);
@@ -139,5 +154,6 @@ export class MapComponent implements OnInit {
     //arr.push(parseInt(res[0]), parseInt(res[1]));
     return arr;
   }
+
 }
 
