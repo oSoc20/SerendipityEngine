@@ -49,7 +49,18 @@ export class MapComponent implements OnInit {
     this.opoi.calculateTiles();
     //this.opoi.requestType("schema:CatholicChurch");
     this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
-    this.opoi.requestType("schema:Museum").then(res => {console.log("schema:Museum:", res)});
+    this.opoi.requestType("schema:Museum").then(res => {
+      console.log("schema:Museum:", res);
+      var temp = res.filter(value => value["asWKT"].includes("POINT"));
+      var amount = temp.length >= 4? 4: temp.length;
+      temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
+      temp.map(poi => {
+        console.log("Adding POI")
+        var coords = this.getCoords(poi["asWKT"]);
+        this.addMarker(coords);
+      })
+      
+    });
   }
 
   exportMap() {
@@ -74,6 +85,23 @@ export class MapComponent implements OnInit {
     var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
     this.map.fitBounds([p1, p2]);
     this.bearing = 0;
+  }
+
+  addMarker(coord: number[]) {
+    new mapboxgl.Marker()
+      //.setLngLat({ lng: this.coord[0], lat: this.coord[1] })
+      .setLngLat({ lng: coord[0], lat: coord[1] })
+      .addTo(this.map);
+  }
+
+  getCoords(str: string): number[] {
+    let regexp = /([0-9\.]+) ([0-9\.]+)/g;
+    let res = str.match(regexp);
+    var temp = res[0].split(' ');
+    var arr: number[] = Array.from(temp).map(Number);
+    //console.log("TEST ->", str, res, arr, temp);
+    //arr.push(parseInt(res[0]), parseInt(res[1]));
+    return arr;
   }
 
 }
