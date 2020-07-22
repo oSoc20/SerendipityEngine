@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { OpoiService } from '../services/opoi/opoi.service';
 import * as jsPDF from 'jspdf'
 import { StoreService } from '../services/store/store.service';
-import { convertPdfToPng } from 'convert-pdf-png';
 
 
 @Component({
