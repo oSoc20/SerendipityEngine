@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@types/mapbox-gl": "^1.11.1",
+    "angular-cli-ghpages": "^0.6.2",
     "angular-mapbox": "^0.2.2",
     "bootstrap": "^4.5.0",
     "convert-pdf-png": "0.0.1",
