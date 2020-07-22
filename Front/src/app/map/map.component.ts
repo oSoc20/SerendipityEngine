@@ -2,10 +2,9 @@ import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { OpoiService } from '../services/opoi/opoi.service';
-import * as jsPDF from 'jspdf'
+import * as jsPDF from 'jspdf';
 import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
-import { StoreService } from '../services/store/store.service';
 
 @Component({
   selector: 'app-map',
