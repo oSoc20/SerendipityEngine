@@ -3,5 +3,21 @@
     height: 100%;
 }
 
+button {
+    font-size: 1.2rem;
+    font-family: "roboto";
+    background-color: #8c00ff;
+    border: #8c00ff 0.2rem solid;
+    border-radius: 5px;
+    padding: 0.4rem 1.5rem;
+    margin: 0.4rem;
+    color: white;
+    transition: all 0.5s ease-in-out;
+}
 
+button:hover {
 
+    border: #8c00ff 0.2rem solid;
+    background-color: white;
+    color: #8c00ff;
+}
