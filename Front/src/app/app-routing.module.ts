@@ -12,10 +12,6 @@ const routes: Routes = [
     component : HomeComponent
   },
   {
-    path:'collections',
-    component : CollectionComponent
-  },
-  {
     path:'about',
     component: AboutComponent
   },
