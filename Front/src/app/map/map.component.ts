@@ -5,6 +5,7 @@ import { OpoiService } from '../services/opoi/opoi.service';
 import * as jsPDF from 'jspdf';
 import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-map',
@@ -68,31 +69,35 @@ export class MapComponent implements OnInit {
 
   exportMap() {
 
-    var img = this.map.getCanvas().toDataURL(); //document.getElementById("map") "image/png"
 
-    var doc = new jsPDF('landscape')
-    doc.setFont("Playfair Display")
-    doc.setFontSize(40)
-    doc.text(this.store.selectedDestinationCity.text, 148.5, 25, 'center'); 
-    doc.setFontSize(20)
-    doc.setLineWidth(4)
-    doc.setDrawColor(81,21,170)
-    doc.rect(40, 45, 220, 130)
-
-
-    doc.text(this.store.selectedDestinationCity.place_name.split(',').pop(), 148.5, 35, 'center'); 
-    doc.addImage(img, 'PNG', 40, 45, 220, 130)
-    doc.setFontSize(8)
-    doc.text(200, 170, "map data © OpenStreetMap contributors")
-
-    doc.setFontSize(40)
-    doc.setFontType('italic')
-    doc.setFontSize(15)
-    doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
-
-
-    doc.save("test.pdf")
-   
+    //var img = this.map.getCanvas().toDataURL(); //document.getElementById("map") "image/png"
+    var img;
+    html2canvas(document.getElementById("map")).then(canvas => {
+      img = canvas.toDataURL();
+      var doc = new jsPDF('landscape')
+      doc.setFont("Playfair Display")
+      doc.setFontSize(40)
+      doc.text(this.store.selectedDestinationCity.text, 148.5, 25, 'center'); 
+      doc.setFontSize(20)
+      doc.setLineWidth(4)
+      doc.setDrawColor(81,21,170)
+      doc.rect(40, 45, 220, 130)
+  
+  
+      doc.text(this.store.selectedDestinationCity.place_name.split(',').pop(), 148.5, 35, 'center'); 
+      doc.addImage(img, 'PNG', 40, 45, 220, 130)
+      doc.setFontSize(8)
+      doc.text(200, 170, "map data © OpenStreetMap contributors")
+  
+      doc.setFontSize(40)
+      doc.setFontType('italic')
+      doc.setFontSize(15)
+      doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
+  
+  
+      doc.save("test.pdf")
+    });
+    
     
 
   }
