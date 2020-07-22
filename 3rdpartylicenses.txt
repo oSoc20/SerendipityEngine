@@ -385,6 +385,9 @@ Apache-2.0
  
 
 
+tiles-in-bbox
+0BSD
+
 zone.js
 MIT
 The MIT License
