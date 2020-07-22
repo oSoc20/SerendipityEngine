@@ -5,7 +5,6 @@ import { OpoiService } from '../services/opoi/opoi.service';
 import * as jsPDF from 'jspdf'
 import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
-import { StoreService } from '../services/store/store.service';
 
 @Component({
   selector: 'app-map',
@@ -27,7 +26,7 @@ export class MapComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.coord = this.city.center;
+      this.coord = this.city.center;
 
     (mapboxgl as any).accessToken = environment.mapbox.accessToken; // dirty 'accessToken read-only' workaround see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
       this.map = new mapboxgl.Map({
