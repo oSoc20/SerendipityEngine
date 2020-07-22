@@ -64,6 +64,18 @@ export class MapComponent implements OnInit {
       })
       
     });
+    this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
+      console.log("taginfo:tourism=attraction", res);
+      var temp = res.filter(value => value["asWKT"].includes("POINT"));
+      var amount = temp.length >= 4? 4: temp.length;
+      temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
+      temp.map(poi => {
+        console.log("Adding POI")
+        var coords = this.getCoords(poi["asWKT"]);
+        this.addMarker(coords);
+      })
+      
+    });
   }
 
   exportMap() {
