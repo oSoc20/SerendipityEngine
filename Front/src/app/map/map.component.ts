@@ -93,6 +93,26 @@ export class MapComponent implements OnInit {
       })
       
     });
+    this.opoi.requestType("schema:Park").then(res => {
+      console.log("schema:Park:", res);
+      var temp = res.filter(value => value["asWKT"] && value["name"]);
+      var amount = temp.length >= 1? 1: temp.length;
+      temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
+      temp.map(poi => {
+        console.log("Adding POI")
+        var coords = this.getCoords(poi["asWKT"]);
+        
+        console.log(poi["name"]);
+        if (Array.isArray(poi["name"])) {
+          var arr: string[] = poi["name"];
+          this.addMarker(coords, arr[0].split(" - ")[0], "green");//poi[name][0]);
+        }
+        else {
+          this.addMarker(coords, poi["name"], "green");
+        }
+      })
+      
+    });
   }
 
   exportMap() {
@@ -144,9 +164,10 @@ export class MapComponent implements OnInit {
     this.bearing = 0;
   }
 
-  addMarker(coord: number[], text: string) {
+  addMarker(coord: number[], text: string, color: string = "transparent") {
     var el = document.createElement('div');
     el.className = 'marker';
+    el.style.backgroundColor = color;
     //el.style.backgroundImage =  "";
     el.innerHTML = "<b>" + text + "</b>";
     el.style.width = '60 px';
