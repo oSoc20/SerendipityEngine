@@ -43,8 +43,8 @@
   <mat-step [stepControl]="fakeControl">
     <ng-template matStepLabel>Transport</ng-template>
     <div class="stepper-content col-12 m-auto">
-      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlock">How do you transport to your selected city ?</h2>
-      <ng-template #elseBlock>
+      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockTransport">How do you transport to your selected city ?</h2>
+      <ng-template #elseBlockTransport>
         <h2 class="text-center">How do you transport to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
         
@@ -61,8 +61,8 @@
   <mat-step [stepControl]="fakeControl" class="m-auto">
     <ng-template matStepLabel>Frequency</ng-template>
     <div class="d-flex justify-content-center flex-column">
-      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlock">How often do you go to the selected city ?</h2>
-      <ng-template #elseBlock>
+      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockFrequency">How often do you go to the selected city ?</h2>
+      <ng-template #elseBlockFrequency>
         <h2 class="text-center">How often do you go to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
       
