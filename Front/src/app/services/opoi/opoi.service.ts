@@ -116,4 +116,19 @@ export class OpoiService {
     });
   }
 
+  // hashtag: [ "taginfo:tourism=attraction",...]
+  requestTag(tag: string): Promise<Object[]> {
+    var result: Object[] = [];
+    return this.requestTiles().toPromise().then(res => {
+      //console.log(res);
+      res.map(response => 
+        {
+          var filtered: Object[] = response["@graph"].filter(res => res["hasTag"].includes(tag));
+          result = result.concat(filtered);
+        });
+      //console.log("result " + type + ": ", result);
+      return result;
+    });
+  }
+
 }
