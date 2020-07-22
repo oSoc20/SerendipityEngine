@@ -55,19 +55,27 @@ export class MapComponent implements OnInit {
     this.opoi.requestType("schema:Museum").then(res => {
       console.log("schema:Museum:", res);
       var temp = res.filter(value => value["asWKT"].includes("POINT"));
-      var amount = temp.length >= 4? 4: temp.length;
+      var amount = temp.length >= 2? 2: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
         console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        this.addMarker(coords, "museum");
+        
+        console.log(poi["name"]);
+        if (Array.isArray(poi["name"])) {
+          var arr: string[] = poi["name"];
+          this.addMarker(coords, arr[0].split(" - ")[0]);//poi[name][0]);
+        }
+        else {
+          this.addMarker(coords, poi["name"]);
+        }
       })
       
     });
     this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
       console.log("taginfo:tourism=attraction", res);
       var temp = res.filter(value => value["asWKT"] && value["name"]);
-      var amount = temp.length >= 4? 4: temp.length;
+      var amount = temp.length >= 3? 3: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
         console.log("Adding POI")
