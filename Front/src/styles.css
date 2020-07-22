@@ -3,9 +3,8 @@
 html, body { height: 100%; }
 body { 
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: #83C5BE;
-    background-image: url('assets/pictures/background.svg');
+    font-family: "Montserrat", "Helvetica Neue", sans-serif;
+    background-color:white;
     background-repeat: no-repeat;
     background-size: cover;
  }

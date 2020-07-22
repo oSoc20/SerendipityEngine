@@ -1,9 +1,8 @@
 export enum Transport {
-    Car,
+    Car = 1,
     Bicycle,
     Foot,
     Train,
-    IntraCity,
     Public,
     Other,
 }

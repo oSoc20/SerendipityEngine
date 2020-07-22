@@ -5,6 +5,8 @@ import { Transport } from 'src/app/utilitaries/transport-enum';
 import { MapboxService, Feature} from '../../services/mapbox/mapbox.service'
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { Frequency } from 'src/app/utilitaries/frequency-enum';
+import { StoreService } from 'src/app/services/store/store.service';
 
 
 @Component({
@@ -16,57 +18,57 @@ export class HomeComponent implements OnInit {
 
   destination : FormGroup;
   origin : FormGroup;
-  selectedTransport : Transport;
+  destinationCity: FormControl;
+  originCity: FormControl;
+
+  selectedFrequency = new FormControl();
+
+  selectedDestinationCity : Feature = null;
+  selectedOriginCity : Feature = null;
+  
+  fakeControl : FormGroup;
   
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
 
-  
   cities: string[] = []; // List of cities based on partial search string
   cityList: Feature[] = []; // List of city suggestions
-  selectedCity: Feature = null;  control = new FormControl();
 
-  destinationControl = new FormControl();
-  originControl = new FormControl();
+  value: string;
+
+  //destinationControl = new FormControl(); 
+  //originControl;
 
   transports = [
     { id : Transport.Car, label : "by car",  picture : "car" },
     { id : Transport.Bicycle, label : "by bicycle",  picture : "bicycle" },
     { id : Transport.Foot, label : "by foot",  picture : "foot" },
     { id : Transport.Train, label : "by train",  picture : "train" },
-    { id : Transport.IntraCity, label : "public transport",  picture : "bus" },
-    { id : Transport.Other, label : "other",  picture : "" },
-   
-  ]
+    { id : Transport.Public, label : "public",  picture : "bus" },
+    { id : Transport.Other, label : "other",  picture : "other" },
+]
 
-  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService) {
+frequencies = [
+    { id : Frequency.Never, label : "Never"},
+    { id : Frequency.Sometimes, label : "Sometimes"},
+    { id : Frequency.Often, label : "Often"},
+]
 
-    this.destination = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
-    });
-    this.origin = this.formBuilder.group({
-      city: ['',[Validators.required,  Validators.maxLength(50),  Validators.minLength(1)]],
-    });
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.thirdFormGroup = this.formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+  constructor(private formBuilder: FormBuilder, private mapboxService: MapboxService, public store : StoreService) {
+    this.fakeControl = this.formBuilder.group({
+      fake : ['',[Validators.required,  Validators.maxLength(100),  Validators.minLength(10)]], 
     });
 
+    this.destination = new FormGroup({destinationCity : new FormControl()});
+    this.origin = new FormGroup({originCity : new FormControl()});
    }
 
   ngAfterViewInit() {
     document.getElementById('main-container').style.height = (window.innerHeight - document.getElementsByTagName("header")[0].offsetHeight - document.getElementsByTagName("footer")[0].offsetHeight) + "px";
+
   }
 
   changeSelectedTransport(value) {
-    this.selectedTransport = value;
+    this.store.selectedTransport = value;
   }
 
   
@@ -80,7 +82,8 @@ export class HomeComponent implements OnInit {
       this.mapboxService
         .search_word(searchTerm)
         .subscribe((features: Feature[]) => {
-          this.cities = features.map(feat => feat.place_name);
+          //this.cities = features.map(feat => feat.place_name);
+          //this.cities = features.map(feat => feat.text);
           this.cityList = features;
         });
     }
@@ -89,10 +92,33 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onSelect(address: string) {
-    this.selectedCity = this.cityList.find(city => city.place_name === address);
-    console.log(this.selectedCity);
+
+  onSelect(address, origin : boolean) {
+    let city = this.cityList.find(city => city.text === address.text);
+    
+    if(origin) {
+      this.store.selectedOriginCity = city;
+      //console.log(this.store.selectedOriginCity);
+    }
+    else {
+      this.store.selectedDestinationCity = city;
+      //console.log(this.store.selectedDestinationCity);
+    }
+
     this.cities = [];
+  }
+
+  /* I let this in comment like this you can know how to access the label of the values #Alexis */
+  display() {
+    console.log("selectedDestinationCity: ",this.store.selectedDestinationCity.text, "\n",
+                "selectedOriginCity: ", this.store.selectedOriginCity.text, "\n",
+                "selectedTransport: ", this.store.selectedTransport, "\n",
+                "selectedFrequency", this.store.selectedFrequency.value
+    );
+  }
+
+  getDisplayName(city: any) {
+    return city.text + ", " + city.place_name.split(',').pop();
   }
 
 }
