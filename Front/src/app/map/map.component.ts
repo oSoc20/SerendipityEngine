@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 import { OpoiService } from '../services/opoi/opoi.service';
+import * as jsPDF from 'jspdf'
+import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
 import { StoreService } from '../services/store/store.service';
 
@@ -10,9 +12,10 @@ import { StoreService } from '../services/store/store.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
+
 export class MapComponent implements OnInit {
   map: mapboxgl.Map;
-  style = 'mapbox://styles/mapbox/streets-v11';
+  style = 'mapbox://styles/occidomoney/ckcu9tdng3kmj1jnrb68j3ly9';
   @Input() city: any;
   coord: number[] = [4.351710, 50.850340]; //long, lat
   bearing: number = 0; //angle
@@ -34,6 +37,7 @@ export class MapComponent implements OnInit {
         center: [this.coord[0], this.coord[1]],
         pitch: 0,//60, // pitch in degrees
         bearing: this.bearing, // bearing in degrees
+        preserveDrawingBuffer:true
     });
 
     this.map.on('load', () => {
@@ -64,13 +68,34 @@ export class MapComponent implements OnInit {
   }
 
   exportMap() {
-    console.log(this.map.getCanvas().toDataURL())
+
     var img = this.map.getCanvas().toDataURL(); //document.getElementById("map") "image/png"
-    //document.write('<img src="'+ img +'"/>');
-    var link = document.createElement('a');
-    link.download = 'filename.png';
-    link.href = img;//document.getElementById('canvas').toDataURL()
-    link.click();
+
+    var doc = new jsPDF('landscape')
+    doc.setFont("Playfair Display")
+    doc.setFontSize(40)
+    doc.text(this.store.selectedDestinationCity.text, 148.5, 25, 'center'); 
+    doc.setFontSize(20)
+    doc.setLineWidth(4)
+    doc.setDrawColor(81,21,170)
+    doc.rect(40, 45, 220, 130)
+
+
+    doc.text(this.store.selectedDestinationCity.place_name.split(',').pop(), 148.5, 35, 'center'); 
+    doc.addImage(img, 'PNG', 40, 45, 220, 130)
+    doc.setFontSize(8)
+    doc.text(200, 170, "map data © OpenStreetMap contributors")
+
+    doc.setFontSize(40)
+    doc.setFontType('italic')
+    doc.setFontSize(15)
+    doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
+
+
+    doc.save("test.pdf")
+   
+    
+
   }
 
   rotateMap(bearingAngle: number) {
@@ -103,5 +128,5 @@ export class MapComponent implements OnInit {
     //arr.push(parseInt(res[0]), parseInt(res[1]));
     return arr;
   }
-
 }
+
