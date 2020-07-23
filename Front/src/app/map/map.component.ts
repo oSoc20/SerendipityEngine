@@ -80,7 +80,7 @@ export class MapComponent implements OnInit {
     this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
     this.opoi.requestType("schema:Museum").then(res => {
       console.log("schema:Museum:", res);
-      var temp = res.filter(value => value["asWKT"].includes("POINT"));
+      var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 2? 2: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
@@ -100,7 +100,7 @@ export class MapComponent implements OnInit {
     });
     this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
       console.log("taginfo:tourism=attraction", res);
-      var temp = res.filter(value => value["asWKT"] && value["name"]);
+      var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 3? 3: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
@@ -120,7 +120,7 @@ export class MapComponent implements OnInit {
     });
     this.opoi.requestType("schema:Park").then(res => {
       console.log("schema:Park:", res);
-      var temp = res.filter(value => value["asWKT"] && value["name"]);
+      var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 1? 1: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
@@ -219,6 +219,10 @@ export class MapComponent implements OnInit {
     //console.log("TEST ->", str, res, arr, temp);
     //arr.push(parseInt(res[0]), parseInt(res[1]));
     return arr;
+  }
+
+  insideBbox(point: number[]): Boolean {
+    return point[0] >= this.city.bbox[0] && point[0] <= this.city.bbox[2] && point[1] >= this.city.bbox[1] && point[1] <= this.city.bbox[3];
   }
 
 }
