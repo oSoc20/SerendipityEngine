@@ -15,7 +15,9 @@ button {
     transition: all 0.5s ease-in-out;
 }
 
-button:hover {
+    background-color: blue;
+}
+
 
     border: #8c00ff 0.2rem solid;
     background-color: white;
