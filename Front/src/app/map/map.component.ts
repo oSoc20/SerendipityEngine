@@ -6,6 +6,7 @@ import * as jsPDF from 'jspdf';
 import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
 import html2canvas from 'html2canvas';
+import { PointsOfInterests } from '../utilitaries/points-of-interests-enum';
 
 @Component({
   selector: 'app-map',
@@ -25,6 +26,18 @@ export class MapComponent implements OnInit {
     private mapboxService: MapboxService,
     public store : StoreService,
   ) { }
+
+  getImagePath(pointType : PointsOfInterests) : string {
+
+      let baseUrl = "../../assets/map/"
+
+      switch(pointType) {
+        case PointsOfInterests.Museum : return baseUrl + "museum.svg";
+        case PointsOfInterests.Attraction : return baseUrl + "attraction.svg";
+        case PointsOfInterests.Park : return baseUrl + "park.svg";
+        case PointsOfInterests.Church : return baseUrl + "church.svg";
+      }
+  }
 
   ngOnInit() {
       this.coord = this.city.center;
@@ -46,6 +59,18 @@ export class MapComponent implements OnInit {
       this.bearing += 180;
       this.bearing %= 360;
       this.map.setBearing(this.bearing);
+
+      this.map.addSource('suburban', {
+        type: 'vector',
+        url: 'mapbox://styles/occidomoney/ckcug15s03qpb1imj0re1w2gy'
+      });
+      
+      this.map.addLayer(
+          {
+            "id": "settlement-minor-label",
+            "source": "suburban",
+          }
+      )
     });
 
     // Add map controls
@@ -65,10 +90,10 @@ export class MapComponent implements OnInit {
         console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
-          this.addMarker(coords, arr[0].split(" - ")[0]);//poi[name][0]);
+          this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Museum);//poi[name][0]);
         }
         else {
-          this.addMarker(coords, poi["name"]);
+          this.addMarker(coords, poi["name"], PointsOfInterests.Museum);
         }
       })
       
@@ -85,10 +110,10 @@ export class MapComponent implements OnInit {
         console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
-          this.addMarker(coords, arr[0].split(" - ")[0]);//poi[name][0]);
+          this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Attraction);//poi[name][0]);
         }
         else {
-          this.addMarker(coords, poi["name"]);
+          this.addMarker(coords, poi["name"], PointsOfInterests.Attraction);
         }
       })
       
@@ -105,14 +130,16 @@ export class MapComponent implements OnInit {
         console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
-          this.addMarker(coords, arr[0].split(" - ")[0], "green");//poi[name][0]);
+          this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Park);//poi[name][0]);
         }
         else {
-          this.addMarker(coords, poi["name"], "green");
+          this.addMarker(coords, poi["name"], PointsOfInterests.Park);
         }
       })
       
     });
+
+   
   }
 
   exportMap() {
@@ -164,17 +191,19 @@ export class MapComponent implements OnInit {
     this.bearing = 0;
   }
 
-  addMarker(coord: number[], text: string, color: string = "transparent") {
+  addMarker(coord: number[], text: string, type : PointsOfInterests, color: string = "transparent") {
+    
+    let icon = this.getImagePath(type);
+    console.log(icon)
+    
     var el = document.createElement('div');
     el.className = 'marker';
-    el.style.backgroundColor = color;
-    //el.style.backgroundImage =  "";
-    el.innerHTML = "<b>" + text + "</b>";
-    el.style.width = '60 px';
-    el.style.height = ' 60 px';
+    //el.style.backgroundColor = color;
+    el.innerHTML = "<img style='width:20px; height:20px' src=\"" + icon + "\"/><b>" + text + "</b>";
+    el.style.width = '50 px';
+    el.style.height = '50 px';
 
     new mapboxgl.Marker(el)
-      //.setLngLat({ lng: this.coord[0], lat: this.coord[1] })
       .setLngLat({ lng: coord[0], lat: coord[1] })
       .addTo(this.map);
   }
