@@ -49,6 +49,7 @@ input:focus {
   border-color: #8c00ff;
   -webkit-box-shadow: none;
   box-shadow: none;
+  outline:none;
 }
 
 
@@ -94,8 +95,13 @@ button:hover {
     color: #8c00ff;
 }
 
-.fa-search {
-    margin-right:20px;
+.fa {
+    margin-left:20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.buttonfa:hover .fa{
+  margin-left: 30px;
 }
 
 .mat-stepper-horizontal {

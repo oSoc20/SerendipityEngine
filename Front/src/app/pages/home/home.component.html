@@ -5,7 +5,7 @@
 
       <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
       <div class="search d-flex flex-column align-items-center">
-        <input 
+        <input
                 type="text"
                 placeholder="I think Brussels is a good choice..."
                 [matAutocomplete]="auto"
@@ -16,7 +16,8 @@
             {{getDisplayName(city)}}
           </mat-option>
         </mat-autocomplete>
-        <button matStepperNext class="d-block mt-5"><i class="fa fa-search"></i>Search</button>
+        <button matStepperNext class="d-block mt-5 buttonfa">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
       </div>
   </mat-step>
 
@@ -35,7 +36,8 @@
                 {{getDisplayName(city)}}
               </mat-option>
             </mat-autocomplete>
-          <button matStepperNext class="d-block mx-auto mt-5"><i class="fa fa-search"></i>Search</button>
+          <button matStepperNext class="d-block mt-5 buttonfa">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
       </div>
   </mat-step>
 
@@ -47,14 +49,15 @@
       <ng-template #elseBlockTransport>
         <h2 class="text-center">How do you transport to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
-        
+
       <div class="row d-flex justify-content-between">
         <div *ngFor="let transport of transports" [ngClass]="{'active': store.selectedTransport == transport.id, 'card' : true}" (click)="changeSelectedTransport(transport.id)">
           <img class="img-fluid picture m-auto" src="assets/pictures/{{transport.picture}}.svg"/>
           <p class="m-auto text-center">{{transport.label}}</p>
         </div>
       </div>
-      <button class="d-block mx-auto mt-5" matStepperNext *ngIf="store.selectedTransport">Next</button>
+      <button matStepperNext class="d-block mt-5 buttonfa mx-auto" *ngIf="store.selectedTransport">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+      </button>
     </div>
   </mat-step>
 
@@ -65,21 +68,21 @@
       <ng-template #elseBlockFrequency>
         <h2 class="text-center">How often do you go to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
-      
+
       <mat-form-field class="m-auto">
         <mat-select placeholder="Select a frequency" class="m-auto" [formControl]="store.selectedFrequency">
           <mat-option class="align-items-center" *ngFor="let frequency of frequencies" [value]="frequency.id">{{frequency.label}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button class="mx-auto mt-5" matStepperNext *ngIf="store.selectedFrequency.value">Next</button>
-    </div>
+      <button matStepperNext class="d-block mt-5 buttonfa mx-auto" *ngIf="store.selectedTransport">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+      </button>    </div>
   </mat-step>
 
   <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>Generate</ng-template>
       <div class="d-flex align-items-center justify-content-center">
-        <button routerLink="/map" (click)="display()" clickclass="btn btn-secondary">Generate my map</button>
+        <button routerLink="/map" (click)="display()" clickclass="btn btn-secondary" class="buttonfa">Generate my map<i class="fa fa-angle-right" aria-hidden="true"></i></button>
       </div>
   </mat-step>
 
