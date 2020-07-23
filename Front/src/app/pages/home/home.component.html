@@ -72,17 +72,18 @@
         </mat-select>
       </mat-form-field>
 
-      <button class="mx-auto mt-5" matStepperNext *ngIf="store.selectedFrequency.value">Next</button>
+      <!--<button class="mx-auto mt-5" matStepperNext *ngIf="store.selectedFrequency.value">Next</button>-->
+      <button  *ngIf="store.selectedFrequency.value"  class="mx-auto mt-5" routerLink="/map" (click)="display()" clickclass="btn btn-secondary">Generate my map</button>
     </div>
   </mat-step>
-
+<!--
   <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>Generate</ng-template>
       <div class="d-flex align-items-center justify-content-center">
         <button routerLink="/map" (click)="display()" clickclass="btn btn-secondary">Generate my map</button>
       </div>
   </mat-step>
-
+-->
 </mat-horizontal-stepper>
 
 <!--
