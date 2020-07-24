@@ -215,4 +215,7 @@ Aha! A generator for surprising yet recognizable maps of your neighbourhood
 - Determenig if a POI retrieved from the OPOI API belongs to a certain city / village
 Based on the OPOI API working with the tiles, it is possible that these tiles contain multiple towns, thus resulting in a respone with POIs from multiple towns.
 Because not all POI objects in the API response contain an address, it is hard to differenciate between these towns.
-The costly solution would be to iterate trough all POIs and make a reverseGeoCoding API request with the coordinate of the POI. 
+The costly solution would be to iterate trough all POIs and make a reverseGeoCoding API request with the coordinate of the POI.
+
+- It would be great to have an overview of all types of POIs contained in the OPOI dataset.
+Having an overview of all types, their @type and maybe @hasTag would be helpfull to quickly find data that fits your usecase.
