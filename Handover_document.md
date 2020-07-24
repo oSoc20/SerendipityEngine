@@ -163,6 +163,15 @@ Aha! A generator for surprising yet recognizable maps of your neighbourhood
             "openingHours": "Mo-Su 16:00-08:00",
             "seeAlso": "https://www.facebook.com/pages/Homoerectus/297097853642834"
         },
+        {
+            "@id": "http://www.openstreetmap.org/way/399792852",
+            "@type": "schema:Park",
+            "asWKT": "POLYGON((4.3534499 50.8387801992782,4.3534523 50.8387749992782,4.3534572 50.8387715992782,4.3534669 50.8387701992782,4.3534752 50.8387720992782,4.3535401 50.8388164992782,4.35383 50.8386599992782,4.3540735 50.8388413992782,4.353642 50.8389247992782,4.3534523 50.8387871992782,4.3534499 50.8387801992782))",
+            "dateModified": "2016-02-25T00:30:19Z",
+            "hasTag": [
+                "taginfo:leisure=garden"
+            ]
+        }
     ],
     "@id": "https://opoi.org/14/8390/5496",
     "dcterms:isPartOf": {
@@ -201,3 +210,9 @@ Aha! A generator for surprising yet recognizable maps of your neighbourhood
     "tiles:zoom": 14
 }
 ```
+
+#### Problems encountered
+- Determenig if a POI retrieved from the OPOI API belongs to a certain city / village
+Based on the OPOI API working with the tiles, it is possible that these tiles contain multiple towns, thus resulting in a respone with POIs from multiple towns.
+Because not all POI objects in the API response contain an address, it is hard to differenciate between these towns.
+The costly solution would be to iterate trough all POIs and make a reverseGeoCoding API request with the coordinate of the POI. 
