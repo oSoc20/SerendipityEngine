@@ -211,7 +211,7 @@ Aha! A generator for surprising yet recognizable maps of your neighbourhood
 }
 ```
 
-#### Problems encountered
+### Problems encountered
 - Determenig if a POI retrieved from the OPOI API belongs to a certain city / village
 Based on the OPOI API working with the tiles, it is possible that these tiles contain multiple towns, thus resulting in a respone with POIs from multiple towns.
 Because not all POI objects in the API response contain an address, it is hard to differenciate between these towns.
