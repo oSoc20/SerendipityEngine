@@ -98,12 +98,12 @@ frequencies = [
     
     if(origin) {
       this.store.selectedOriginCity = city;
-      console.log(this.store.selectedOriginCity);
+      //console.log(this.store.selectedOriginCity);
     }
     else {
       this.store.selectedDestinationCity = city;
       this.setHardcoded();
-      console.log(this.store.selectedDestinationCity);
+      //console.log(this.store.selectedDestinationCity);
     }
 
     this.cities = [];
@@ -123,7 +123,6 @@ frequencies = [
 
   setHardcoded() {
     if (this.store.selectedDestinationCity.text === "Brussels") {
-      console.log("Brussel is overschreven");
       this.store.selectedDestinationCity = this.store.brussels;
     }
     else if (this.store.selectedDestinationCity.text === "Antwerpen") {

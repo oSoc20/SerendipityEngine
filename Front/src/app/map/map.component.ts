@@ -77,17 +77,17 @@ export class MapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
     //this.opoi.requestType("schema:CatholicChurch");
-    this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
+    //this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
     this.opoi.requestType("schema:Museum").then(res => {
-      console.log("schema:Museum:", res);
+      //console.log("schema:Museum:", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 2? 2: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
         
-        console.log(poi["name"]);
+        //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
           this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Museum);//poi[name][0]);
@@ -99,15 +99,15 @@ export class MapComponent implements OnInit {
       
     });
     this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
-      console.log("taginfo:tourism=attraction", res);
+      //console.log("taginfo:tourism=attraction", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 3? 3: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
         
-        console.log(poi["name"]);
+        //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
           this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Attraction);//poi[name][0]);
@@ -119,15 +119,15 @@ export class MapComponent implements OnInit {
       
     });
     this.opoi.requestType("schema:Park").then(res => {
-      console.log("schema:Park:", res);
+      //console.log("schema:Park:", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 1? 1: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
         
-        console.log(poi["name"]);
+        //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
           this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Park);//poi[name][0]);
@@ -187,7 +187,7 @@ export class MapComponent implements OnInit {
     //var offset = 0.035;
     var offset = 0;
     //var offset = Math.min(Math.abs(this.city.bbox[0] - this.city.bbox[2]), Math.abs(this.city.bbox[1] - this.city.bbox[3]))*0.1;
-    console.log("OFFSET", this.city.bbox[0] - this.city.bbox[2], this.city.bbox[1] - this.city.bbox[3])
+    //console.log("OFFSET", this.city.bbox[0] - this.city.bbox[2], this.city.bbox[1] - this.city.bbox[3])
     var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
     var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
     this.map.fitBounds([p1, p2]);
@@ -197,7 +197,7 @@ export class MapComponent implements OnInit {
   addMarker(coord: number[], text: string, type : PointsOfInterests, color: string = "transparent") {
     
     let icon = this.getImagePath(type);
-    console.log(icon)
+    //console.log(icon)
     
     var el = document.createElement('div');
     el.className = 'marker';

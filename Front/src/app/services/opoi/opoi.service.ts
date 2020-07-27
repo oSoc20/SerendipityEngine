@@ -25,7 +25,7 @@ export class OpoiService {
   //Follows the GeoJson/OpenStreetMaps convention of a clockwise box starting at the bottom.
   calculateTiles() {
     this.tiles = t.tilesInBbox(this.getBbox(), this.zoom);
-    console.log("tiles:", this.tiles);
+    //console.log("tiles:", this.tiles);
   }
 
   /*
