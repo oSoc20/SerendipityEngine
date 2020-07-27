@@ -170,7 +170,7 @@ export class MapComponent implements OnInit {
       doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
   
   
-      doc.save("test.pdf")
+      doc.save(this.store.selectedDestinationCity.text + "_mentalmap.pdf")
     });
     
     
