@@ -187,7 +187,7 @@ export class MapComponent implements OnInit {
     //var offset = 0.035;
     var offset = 0;
     //var offset = Math.min(Math.abs(this.city.bbox[0] - this.city.bbox[2]), Math.abs(this.city.bbox[1] - this.city.bbox[3]))*0.1;
-    console.log("OFFSET", this.city.bbox[0] - this.city.bbox[2], this.city.bbox[1] - this.city.bbox[3])
+    //console.log("OFFSET", this.city.bbox[0] - this.city.bbox[2], this.city.bbox[1] - this.city.bbox[3])
     var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
     var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
     this.map.fitBounds([p1, p2]);
@@ -197,7 +197,7 @@ export class MapComponent implements OnInit {
   addMarker(coord: number[], text: string, type : PointsOfInterests, color: string = "transparent") {
     
     let icon = this.getImagePath(type);
-    console.log(icon)
+    //console.log(icon)
     
     var el = document.createElement('div');
     el.className = 'marker';
