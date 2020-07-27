@@ -77,7 +77,7 @@ export class MapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
     //this.opoi.requestType("schema:CatholicChurch");
-    this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
+    //this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
     this.opoi.requestType("schema:Museum").then(res => {
       //console.log("schema:Museum:", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
