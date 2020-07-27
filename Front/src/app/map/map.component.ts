@@ -185,8 +185,8 @@ export class MapComponent implements OnInit {
 
   fitMap() {
     //var offset = 0.035;
-    //var offset = 0;
-    var offset = Math.min(Math.abs(this.city.bbox[0] - this.city.bbox[2]), Math.abs(this.city.bbox[1] - this.city.bbox[3]))*0.1;
+    var offset = 0;
+    //var offset = Math.min(Math.abs(this.city.bbox[0] - this.city.bbox[2]), Math.abs(this.city.bbox[1] - this.city.bbox[3]))*0.1;
     console.log("OFFSET", this.city.bbox[0] - this.city.bbox[2], this.city.bbox[1] - this.city.bbox[3])
     var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
     var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];

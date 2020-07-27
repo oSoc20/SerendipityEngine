@@ -102,6 +102,7 @@ frequencies = [
     }
     else {
       this.store.selectedDestinationCity = city;
+      this.setHardcoded();
       console.log(this.store.selectedDestinationCity);
     }
 
@@ -118,6 +119,19 @@ frequencies = [
 
   getDisplayName(city: any) {
     return city.text + ", " + city.place_name.split(',').pop();
+  }
+
+  setHardcoded() {
+    if (this.store.selectedDestinationCity.text === "Brussels") {
+      console.log("Brussel is overschreven");
+      this.store.selectedDestinationCity = this.store.brussels;
+    }
+    else if (this.store.selectedDestinationCity.text === "Antwerpen") {
+      this.store.selectedDestinationCity = this.store.antwerp;
+    }
+    else if (this.store.selectedDestinationCity.text === "Gent") {
+      this.store.selectedDestinationCity = this.store.ghent;
+    }
   }
 
 }
