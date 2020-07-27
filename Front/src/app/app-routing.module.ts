@@ -4,11 +4,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { AboutComponent } from './pages/about/about.component';
 import { MapPageComponent } from './pages/map/map.component';
+import { IntroductionComponent } from './pages/introduction/introduction.component';
 
 
 const routes: Routes = [
   {
     path:'',
+    component : IntroductionComponent
+  },
+  {
+    path:'engine',
     component : HomeComponent
   },
   {

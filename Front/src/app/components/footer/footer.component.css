@@ -10,23 +10,15 @@ footer {
 }
 
 footer img {
-    margin-left:20px
+    margin-left:20px;
+    height: 30px;
+}
+
+#imec {
+    height:43px;
 }
 
 footer p {
     margin:0;
     padding:0;
-}
-
-.imec {
-    height: 80px;
-}
-
-.idlab {
-    height: 35px;
-}
-
-.osoc {
-    width: 50px;
-    height: 50px;
 }
