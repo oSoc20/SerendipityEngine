@@ -79,15 +79,15 @@ export class MapComponent implements OnInit {
     //this.opoi.requestType("schema:CatholicChurch");
     this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
     this.opoi.requestType("schema:Museum").then(res => {
-      console.log("schema:Museum:", res);
+      //console.log("schema:Museum:", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 2? 2: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
         
-        console.log(poi["name"]);
+        //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
           this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Museum);//poi[name][0]);
@@ -99,15 +99,15 @@ export class MapComponent implements OnInit {
       
     });
     this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
-      console.log("taginfo:tourism=attraction", res);
+      //console.log("taginfo:tourism=attraction", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 3? 3: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
         
-        console.log(poi["name"]);
+        //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
           this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Attraction);//poi[name][0]);
@@ -119,15 +119,15 @@ export class MapComponent implements OnInit {
       
     });
     this.opoi.requestType("schema:Park").then(res => {
-      console.log("schema:Park:", res);
+      //console.log("schema:Park:", res);
       var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
       var amount = temp.length >= 1? 1: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
         
-        console.log(poi["name"]);
+        //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
           this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Park);//poi[name][0]);
