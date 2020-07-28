@@ -8,7 +8,7 @@ import { MapboxService } from '../services/mapbox/mapbox.service';
 import html2canvas from 'html2canvas';
 import { PointsOfInterests } from '../utilitaries/points-of-interests-enum';
 import { Transport } from '../utilitaries/transport-enum';
-import { type } from 'os';
+//import { type } from 'os';
 import { filter } from 'rxjs/operators';
 
 @Component({
