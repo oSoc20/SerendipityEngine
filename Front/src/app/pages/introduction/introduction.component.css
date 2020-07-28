@@ -9,10 +9,6 @@ button {
   transition: all 0.5s ease-in-out;
 }
 
-#main-container {
-  padding-top: 5rem;;
-}
-
 button:hover {
 
   border: #8c00ff 0.2rem solid;
@@ -37,8 +33,3 @@ h1{
   margin-bottom:4%;
 }
 
-.img-introduction {
-  width: 30rem;
-  height: 30rem;
-  margin-left: 2rem;
-}

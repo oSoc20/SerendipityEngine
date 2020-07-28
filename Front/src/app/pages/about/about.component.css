@@ -6,11 +6,9 @@ h1 {
       font-weight: 600;
 }
 
-video{
-  height: 20rem;
-  margin-top: -6rem;
+video source {
+  margin:0;
+  padding:0;
+  top:0
 }
 
-.content-about{
-  margin-top: -6rem;
-}
