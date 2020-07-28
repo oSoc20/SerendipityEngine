@@ -16,7 +16,7 @@
             {{getDisplayName(city)}}
           </mat-option>
         </mat-autocomplete>
-        <button matStepperNext class="d-block mt-5 buttonfa">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+        <button *ngIf="store.selectedDestinationCity" matStepperNext class="d-block mt-5 buttonfa">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>
   </mat-step>
@@ -36,7 +36,7 @@
                 {{getDisplayName(city)}}
               </mat-option>
             </mat-autocomplete>
-          <button matStepperNext class="d-block mt-5 buttonfa">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
+          <button *ngIf="store.selectedOriginCity" matStepperNext class="d-block mt-5 buttonfa">Next<i class="fa fa-angle-right" aria-hidden="true"></i>
         </button>
       </div>
   </mat-step>
