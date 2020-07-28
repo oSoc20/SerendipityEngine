@@ -5,6 +5,7 @@ import { CollectionComponent } from './pages/collection/collection.component';
 import { AboutComponent } from './pages/about/about.component';
 import { MapPageComponent } from './pages/map/map.component';
 import { IntroductionComponent } from './pages/introduction/introduction.component';
+import { MapGuardService } from './services/map-guard.service';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   },
   {
     path:'map',
-    component : MapPageComponent
+    component : MapPageComponent,
+    canActivate : [MapGuardService]
   }
 ];
 
