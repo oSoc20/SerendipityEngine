@@ -16,3 +16,17 @@ button:hover {
     background-color: white;
     color: #8c00ff;
 }
+
+h1{
+  color : #161616;
+  font-size: 3rem;
+  font-family: "Playfair Display", "serif";
+  font-weight: 600;
+  margin-bottom:4%;
+}
+
+.img-introduction {
+  width: 30rem;
+  height: 30rem;
+  margin-left: 2rem;
+}
