@@ -7,6 +7,9 @@ import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
 import html2canvas from 'html2canvas';
 import { PointsOfInterests } from '../utilitaries/points-of-interests-enum';
+import { Transport } from '../utilitaries/transport-enum';
+import { type } from 'os';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map',
@@ -54,24 +57,117 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on('load', () => {
-      this.fitMap();
-      this.bearing = this.mapboxService.calculate_bearing(this.store.selectedDestinationCity.center, this.store.selectedOriginCity.center);
-      this.bearing += 180;
-      this.bearing %= 360;
-      this.map.setBearing(this.bearing);
-
-      this.map.addSource('suburban', {
-        type: 'vector',
-        url: 'mapbox://styles/occidomoney/ckcug15s03qpb1imj0re1w2gy'
-      });
       
-      this.map.addLayer(
-          {
-            "id": "settlement-minor-label",
-            "source": "suburban",
-          }
-      )
+      
+    this.map.addSource('mapbox-streets', {
+      type: 'vector',
+      url: 'mapbox://mapbox.mapbox-streets-v8'
     });
+
+    if(this.store.selectedTransport == Transport.Train || this.store.selectedTransport == Transport.Public) {
+      this.map.addLayer({
+        'id': 'train',
+        'type': 'symbol',
+        'source': 'mapbox-streets',
+        'source-layer': 'building',
+        layout : {
+          "icon-image" : "rail"
+        },
+        "filter" : ["==", "train_station", ["get", "type"]]
+      });
+    }
+
+
+    if(this.store.selectedTransport == Transport.Public) {
+      this.map.addLayer({
+        'id': 'tram',
+        'type': 'symbol',
+        'source': 'mapbox-streets',
+        'source-layer': 'transit_stop_label',
+        layout : {
+          "icon-image" : "rail-metro"
+        },
+        "filter" : ["==", "tram", ["get", "mode"]]
+      });
+
+      this.map.addLayer({
+        'id': 'metro',
+        'type': 'symbol',
+        'source': 'mapbox-streets',
+        'source-layer': 'transit_stop_label',
+        layout : {
+          "icon-image" : "rail-metro"
+        },
+        "filter" : ["==", "metro_rail", ["get", "mode"]]
+      });
+
+      this.map.addLayer({
+        'id': 'bus',
+        'type': 'symbol',
+        'source': 'mapbox-streets',
+        'source-layer': 'transit_stop_label',
+        layout : {
+          "icon-image" : "bus"
+        },
+        "filter" : ["==", "bus", ["get", "mode"]]
+      });
+
+    }
+
+    if(this.store.selectedTransport && this.store.selectedTransport == Transport.Car) {
+      if(this.store.selectedDestinationCity.text != this.store.selectedOriginCity.text) {
+        this.map.addLayer({
+          'id': 'motorway',
+          'type': 'line',
+          'source': 'mapbox-streets',
+          'source-layer': 'road',
+          'paint': {
+            'line-color': 'rgba(55,148,179,1)'
+          },
+          "filter" : ["==", "motorway", ["get", "class"]]
+        });
+      }
+
+      else {
+        this.map.addLayer({
+          'id': 'smallroads',
+          'type': 'line',
+          'source': 'mapbox-streets',
+          'source-layer': 'road',
+          'paint': {
+            'line-color': 'rgba(55,148,179,1)'
+          },
+          "filter" : ["==", "street", ["get", "class"]]
+        });
+      }
+      
+    }
+
+    if(this.store.selectedTransport && this.store.selectedTransport == Transport.Bicycle) {
+        this.map.addLayer({
+          'id': 'bycicle',
+          'type': 'line',
+          'source': 'mapbox-streets',
+          'source-layer': 'road',
+          'paint': {
+            'line-color': 'rgba(55,148,179,1)'
+          },
+          "filter" : ["==", "yes", ["get", "bike_lane"]]
+        });
+    }
+
+    if(this.store.selectedTransport && this.store.selectedTransport == Transport.Bicycle || this.store.selectedTransport == Transport.Foot) {
+      this.map.addLayer({
+        'id': 'lightweight',
+        'type': 'line',
+        'source': 'mapbox-streets',
+        'source-layer': 'road',
+        'paint': {
+          'line-color': 'rgba(55,148,179,1)'
+        },
+        "filter" : ["==", "path", ["get", "class"]]
+      });
+  }
 
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
@@ -140,7 +236,8 @@ export class MapComponent implements OnInit {
     });
 
    
-  }
+  });
+}
 
   exportMap() {
 
