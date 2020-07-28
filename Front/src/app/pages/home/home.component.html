@@ -3,7 +3,7 @@
   <mat-step [stepControl]="fakeControl" class="h-100 d-flex justify-content-center align-items-center">
       <ng-template matStepLabel>Destination</ng-template>
 
-      <h2 class="text-center"><b>Where</b> do you want to go to ?</h2>
+      <h2 class="text-center"><b>Where</b> do you want to go <b>to</b> ?</h2>
       <div class="search d-flex flex-column align-items-center">
         <input
                 type="text"
@@ -23,7 +23,7 @@
 
   <mat-step [stepControl]="fakeControl">
       <ng-template matStepLabel>City of living</ng-template>
-      <h2 class="text-center">Where do you come from ?</h2>
+      <h2 class="text-center"><b>Where</b> do you come <b>from</b> ?</h2>
       <div class="search d-flex flex-column align-items-center">
             <input
                   type="text"
@@ -45,9 +45,9 @@
   <mat-step [stepControl]="fakeControl">
     <ng-template matStepLabel>Transport</ng-template>
     <div class="stepper-content col-12 m-auto">
-      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockTransport">How do you transport to your selected city ?</h2>
+      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockTransport"><b>How</b> do you transport to your selected city ?</h2>
       <ng-template #elseBlockTransport>
-        <h2 class="text-center">How do you transport to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
+        <h2 class="text-center"><b>How</b> do you transport to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
 
       <div class="row d-flex justify-content-between">
@@ -64,9 +64,9 @@
   <mat-step [stepControl]="fakeControl" class="m-auto">
     <ng-template matStepLabel>Frequency</ng-template>
     <div class="d-flex justify-content-center flex-column">
-      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockFrequency">How often do you go to the selected city ?</h2>
+      <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockFrequency"><b>How often</b> do you go to the selected city ?</h2>
       <ng-template #elseBlockFrequency>
-        <h2 class="text-center">How often do you go to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
+        <h2 class="text-center"><b>How often</b> do you go to <span class="cityName">{{store.selectedDestinationCity.text}}</span> ?</h2>
       </ng-template>
 
       <mat-form-field class="m-auto">
