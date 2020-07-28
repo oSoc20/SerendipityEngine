@@ -7,6 +7,8 @@ import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
 import html2canvas from 'html2canvas';
 import { PointsOfInterests } from '../utilitaries/points-of-interests-enum';
+import { Transport } from '../utilitaries/transport-enum';
+import { type } from 'os';
 
 @Component({
   selector: 'app-map',
@@ -54,23 +56,25 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on('load', () => {
-      this.fitMap();
-      this.bearing = this.mapboxService.calculate_bearing(this.store.selectedDestinationCity.center, this.store.selectedOriginCity.center);
-      this.bearing += 180;
-      this.bearing %= 360;
-      this.map.setBearing(this.bearing);
-
-      this.map.addSource('suburban', {
+      this.map.addSource('mapbox-streets', {
         type: 'vector',
-        url: 'mapbox://styles/occidomoney/ckcug15s03qpb1imj0re1w2gy'
+        url: 'mapbox://mapbox.mapbox-streets-v8'
       });
+
+    if(this.store.selectedTransport == Transport.Train) {
+
+    }
       
-      this.map.addLayer(
-          {
-            "id": "settlement-minor-label",
-            "source": "suburban",
-          }
-      )
+    this.map.addLayer({
+      'id': 'train',
+      'type': 'circle',
+      'source': 'mapbox-streets',
+      'source-layer': 'buildings',
+      'paint': {
+        'circle-radius': 8,
+        'circle-color': 'rgba(55,148,179,1)'
+      },
+
     });
 
     // Add map controls
@@ -140,7 +144,8 @@ export class MapComponent implements OnInit {
     });
 
    
-  }
+  });
+}
 
   exportMap() {
 

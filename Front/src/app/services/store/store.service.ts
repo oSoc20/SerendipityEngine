@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Feature } from '../mapbox/mapbox.service';
+import { Transport } from 'src/app/utilitaries/transport-enum';
 
 @Injectable({
   providedIn: 'root'
