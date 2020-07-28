@@ -1,4 +1,16 @@
 
 h1 {
-    margin-bottom: 5%;
+      color : #161616;
+      font-size: 3rem;
+      font-family: "Playfair Display", "serif";
+      font-weight: 600;
+}
+
+video{
+  height: 20rem;
+  margin-top: -6rem;
+}
+
+.content-about{
+  margin-top: -6rem;
 }

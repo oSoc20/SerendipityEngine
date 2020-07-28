@@ -8,7 +8,7 @@ import { MapboxService } from '../services/mapbox/mapbox.service';
 import html2canvas from 'html2canvas';
 import { PointsOfInterests } from '../utilitaries/points-of-interests-enum';
 import { Transport } from '../utilitaries/transport-enum';
-import { type } from 'os';
+// import { type } from 'os';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -57,8 +57,8 @@ export class MapComponent implements OnInit {
     });
 
     this.map.on('load', () => {
-      
-      
+
+
     this.map.addSource('mapbox-streets', {
       type: 'vector',
       url: 'mapbox://mapbox.mapbox-streets-v8'
@@ -140,7 +140,7 @@ export class MapComponent implements OnInit {
           "filter" : ["==", "street", ["get", "class"]]
         });
       }
-      
+
     }
 
     if(this.store.selectedTransport && this.store.selectedTransport == Transport.Bicycle) {
@@ -182,7 +182,7 @@ export class MapComponent implements OnInit {
       temp.map(poi => {
         //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        
+
         //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
@@ -192,7 +192,7 @@ export class MapComponent implements OnInit {
           this.addMarker(coords, poi["name"], PointsOfInterests.Museum);
         }
       })
-      
+
     });
     this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
       //console.log("taginfo:tourism=attraction", res);
@@ -202,7 +202,7 @@ export class MapComponent implements OnInit {
       temp.map(poi => {
         //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        
+
         //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
@@ -212,7 +212,7 @@ export class MapComponent implements OnInit {
           this.addMarker(coords, poi["name"], PointsOfInterests.Attraction);
         }
       })
-      
+
     });
     this.opoi.requestType("schema:Park").then(res => {
       //console.log("schema:Park:", res);
@@ -222,7 +222,7 @@ export class MapComponent implements OnInit {
       temp.map(poi => {
         //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        
+
         //console.log(poi["name"]);
         if (Array.isArray(poi["name"])) {
           var arr: string[] = poi["name"];
@@ -232,10 +232,10 @@ export class MapComponent implements OnInit {
           this.addMarker(coords, poi["name"], PointsOfInterests.Park);
         }
       })
-      
+
     });
 
-   
+
   });
 }
 
@@ -249,28 +249,28 @@ export class MapComponent implements OnInit {
       var doc = new jsPDF('landscape')
       doc.setFont("Playfair Display")
       doc.setFontSize(40)
-      doc.text(this.store.selectedDestinationCity.text, 148.5, 25, 'center'); 
+      doc.text(this.store.selectedDestinationCity.text, 148.5, 25, 'center');
       doc.setFontSize(20)
       doc.setLineWidth(4)
       doc.setDrawColor(81,21,170)
       doc.rect(40, 45, 220, 130)
-  
-  
-      doc.text(this.store.selectedDestinationCity.place_name.split(',').pop(), 148.5, 35, 'center'); 
+
+
+      doc.text(this.store.selectedDestinationCity.place_name.split(',').pop(), 148.5, 35, 'center');
       doc.addImage(img, 'PNG', 40, 45, 220, 130)
       doc.setFontSize(8)
       doc.text(200, 170, "map data © OpenStreetMap contributors")
-  
+
       doc.setFontSize(40)
       doc.setFontType('italic')
       doc.setFontSize(15)
-      doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
-  
-  
+      doc.text("made with the serendipity engine", 148.5, 195, 'center');
+
+
       doc.save(this.store.selectedDestinationCity.text + "_mentalmap.pdf")
     });
-    
-    
+
+
 
   }
 
@@ -292,10 +292,10 @@ export class MapComponent implements OnInit {
   }
 
   addMarker(coord: number[], text: string, type : PointsOfInterests, color: string = "transparent") {
-    
+
     let icon = this.getImagePath(type);
     //console.log(icon)
-    
+
     var el = document.createElement('div');
     el.className = 'marker';
     //el.style.backgroundColor = color;

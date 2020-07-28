@@ -12,4 +12,9 @@ export class IntroductionComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    document.getElementById('main-container').style.height = (window.innerHeight - document.getElementsByTagName("header")[0].offsetHeight - document.getElementsByTagName("footer")[0].offsetHeight) + "px";
+
+  }
+
 }
