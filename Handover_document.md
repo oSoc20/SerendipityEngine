@@ -219,3 +219,6 @@ The costly solution would be to iterate trough all POIs and make a reverseGeoCod
 
 - It would be great to have an overview of all types of POIs contained in the OPOI dataset.
 Having an overview of all types, their @type and maybe @hasTag would be helpfull to quickly find data that fits your usecase.
+
+- Flickr API not responding with usefull data, see [discussion](https://www.flickr.com/groups/api/discuss/72157715195176202/).
+The plan was to use the Flickr places endpoint to retrieve the popular areas (most pictures taken) and based on that determine areas of interest.
