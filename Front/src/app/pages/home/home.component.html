@@ -1,6 +1,6 @@
-<mat-horizontal-stepper id="main-container" class="d-flex align-items-center flex-column" [linear]="isLinear" #stepper>
+<mat-horizontal-stepper id="main-container" class="d-flex align-items-center flex-column" [linear]="true" #stepper>
 
-  <mat-step [stepControl]="fakeControl" class="h-100 d-flex justify-content-center align-items-center">
+  <mat-step [completed]="store.selectedDestinationCity" [stepControl]="fakeControl" class="h-100 d-flex justify-content-center align-items-center">
       <ng-template matStepLabel>Destination</ng-template>
 
       <h2 class="text-center"><b>Where</b> do you want to go <b>to</b> ?</h2>
@@ -21,7 +21,7 @@
       </div>
   </mat-step>
 
-  <mat-step [stepControl]="fakeControl">
+  <mat-step [completed]="store.selectedOriginCity" [stepControl]="fakeControl">
       <ng-template matStepLabel>City of living</ng-template>
       <h2 class="text-center"><b>Where</b> do you come <b>from</b> ?</h2>
       <div class="search d-flex flex-column align-items-center">
@@ -42,7 +42,7 @@
   </mat-step>
 
 
-  <mat-step [stepControl]="fakeControl">
+  <mat-step [completed]="store.selectedTransport" [stepControl]="fakeControl">
     <ng-template matStepLabel>Transport</ng-template>
     <div class="stepper-content col-12 m-auto">
       <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockTransport"><b>How</b> do you transport to your selected city ?</h2>
@@ -61,7 +61,7 @@
     </div>
   </mat-step>
 
-  <mat-step [stepControl]="fakeControl" class="m-auto">
+  <mat-step [completed]="store.selectedFrequency.value" [stepControl]="fakeControl" class="m-auto">
     <ng-template matStepLabel>Frequency</ng-template>
     <div class="d-flex justify-content-center flex-column">
       <h2 class="text-center" *ngIf="!store.selectedDestinationCity; else elseBlockFrequency"><b>How often</b> do you go to the selected city ?</h2>
