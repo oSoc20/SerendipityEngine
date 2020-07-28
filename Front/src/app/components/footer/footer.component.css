@@ -10,9 +10,12 @@ footer {
 }
 
 footer img {
-    width: 30px;
+    margin-left:20px;
     height: 30px;
-    margin-left:20px
+}
+
+#imec {
+    height:43px;
 }
 
 footer p {

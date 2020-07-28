@@ -6,6 +6,7 @@ import * as jsPDF from 'jspdf';
 import { StoreService } from '../services/store/store.service';
 import { MapboxService } from '../services/mapbox/mapbox.service';
 import html2canvas from 'html2canvas';
+import { PointsOfInterests } from '../utilitaries/points-of-interests-enum';
 
 @Component({
   selector: 'app-map',
@@ -26,8 +27,20 @@ export class MapComponent implements OnInit {
     public store : StoreService,
   ) { }
 
+  getImagePath(pointType : PointsOfInterests) : string {
+
+      let baseUrl = "../../assets/map/"
+
+      switch(pointType) {
+        case PointsOfInterests.Museum : return baseUrl + "museum.svg";
+        case PointsOfInterests.Attraction : return baseUrl + "attraction.svg";
+        case PointsOfInterests.Park : return baseUrl + "park.svg";
+        case PointsOfInterests.Church : return baseUrl + "church.svg";
+      }
+  }
+
   ngOnInit() {
-      this.coord = this.city.center;
+    this.coord = this.city.center;
 
     (mapboxgl as any).accessToken = environment.mapbox.accessToken; // dirty 'accessToken read-only' workaround see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/23467
       this.map = new mapboxgl.Map({
@@ -46,25 +59,87 @@ export class MapComponent implements OnInit {
       this.bearing += 180;
       this.bearing %= 360;
       this.map.setBearing(this.bearing);
+
+      this.map.addSource('suburban', {
+        type: 'vector',
+        url: 'mapbox://styles/occidomoney/ckcug15s03qpb1imj0re1w2gy'
+      });
+      
+      this.map.addLayer(
+          {
+            "id": "settlement-minor-label",
+            "source": "suburban",
+          }
+      )
     });
 
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
     this.opoi.calculateTiles();
     //this.opoi.requestType("schema:CatholicChurch");
-    this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
+    //this.opoi.requestType("schema:CatholicChurch").then(res => {console.log("schema:CatholicChurch:", res)});
     this.opoi.requestType("schema:Museum").then(res => {
-      console.log("schema:Museum:", res);
-      var temp = res.filter(value => value["asWKT"].includes("POINT"));
-      var amount = temp.length >= 4? 4: temp.length;
+      //console.log("schema:Museum:", res);
+      var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
+      var amount = temp.length >= 2? 2: temp.length;
       temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
       temp.map(poi => {
-        console.log("Adding POI")
+        //console.log("Adding POI")
         var coords = this.getCoords(poi["asWKT"]);
-        this.addMarker(coords);
+        
+        //console.log(poi["name"]);
+        if (Array.isArray(poi["name"])) {
+          var arr: string[] = poi["name"];
+          this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Museum);//poi[name][0]);
+        }
+        else {
+          this.addMarker(coords, poi["name"], PointsOfInterests.Museum);
+        }
       })
       
     });
+    this.opoi.requestTag("taginfo:tourism=attraction").then(res => {
+      //console.log("taginfo:tourism=attraction", res);
+      var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
+      var amount = temp.length >= 3? 3: temp.length;
+      temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
+      temp.map(poi => {
+        //console.log("Adding POI")
+        var coords = this.getCoords(poi["asWKT"]);
+        
+        //console.log(poi["name"]);
+        if (Array.isArray(poi["name"])) {
+          var arr: string[] = poi["name"];
+          this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Attraction);//poi[name][0]);
+        }
+        else {
+          this.addMarker(coords, poi["name"], PointsOfInterests.Attraction);
+        }
+      })
+      
+    });
+    this.opoi.requestType("schema:Park").then(res => {
+      //console.log("schema:Park:", res);
+      var temp = res.filter(value => value["asWKT"] && value["name"] && this.insideBbox(this.getCoords(value["asWKT"])));
+      var amount = temp.length >= 1? 1: temp.length;
+      temp = temp.sort(() => 0.5 - Math.random()).slice(0, amount);
+      temp.map(poi => {
+        //console.log("Adding POI")
+        var coords = this.getCoords(poi["asWKT"]);
+        
+        //console.log(poi["name"]);
+        if (Array.isArray(poi["name"])) {
+          var arr: string[] = poi["name"];
+          this.addMarker(coords, arr[0].split(" - ")[0], PointsOfInterests.Park);//poi[name][0]);
+        }
+        else {
+          this.addMarker(coords, poi["name"], PointsOfInterests.Park);
+        }
+      })
+      
+    });
+
+   
   }
 
   exportMap() {
@@ -95,7 +170,7 @@ export class MapComponent implements OnInit {
       doc.text("made with the serendipity engine", 148.5, 195, 'center'); 
   
   
-      doc.save("test.pdf")
+      doc.save(this.store.selectedDestinationCity.text + "_mentalmap.pdf")
     });
     
     
@@ -109,16 +184,29 @@ export class MapComponent implements OnInit {
   }
 
   fitMap() {
-    var offset = 0.035;
+    //var offset = 0.035;
+    var offset = 0;
+    //var offset = Math.min(Math.abs(this.city.bbox[0] - this.city.bbox[2]), Math.abs(this.city.bbox[1] - this.city.bbox[3]))*0.1;
+    //console.log("OFFSET", this.city.bbox[0] - this.city.bbox[2], this.city.bbox[1] - this.city.bbox[3])
     var p1: mapboxgl.PointLike = [this.city.bbox[0] - offset, this.city.bbox[1] - offset];
     var p2: mapboxgl.PointLike = [this.city.bbox[2] + offset, this.city.bbox[3] + offset];
     this.map.fitBounds([p1, p2]);
     this.bearing = 0;
   }
 
-  addMarker(coord: number[]) {
-    new mapboxgl.Marker()
-      //.setLngLat({ lng: this.coord[0], lat: this.coord[1] })
+  addMarker(coord: number[], text: string, type : PointsOfInterests, color: string = "transparent") {
+    
+    let icon = this.getImagePath(type);
+    //console.log(icon)
+    
+    var el = document.createElement('div');
+    el.className = 'marker';
+    //el.style.backgroundColor = color;
+    el.innerHTML = "<img style='width:20px; height:20px' src=\"" + icon + "\"/><b>" + text + "</b>";
+    el.style.width = '50 px';
+    el.style.height = '50 px';
+
+    new mapboxgl.Marker(el)
       .setLngLat({ lng: coord[0], lat: coord[1] })
       .addTo(this.map);
   }
@@ -132,5 +220,10 @@ export class MapComponent implements OnInit {
     //arr.push(parseInt(res[0]), parseInt(res[1]));
     return arr;
   }
+
+  insideBbox(point: number[]): Boolean {
+    return point[0] >= this.city.bbox[0] && point[0] <= this.city.bbox[2] && point[1] >= this.city.bbox[1] && point[1] <= this.city.bbox[3];
+  }
+
 }
 

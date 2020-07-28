@@ -25,7 +25,7 @@ export class OpoiService {
   //Follows the GeoJson/OpenStreetMaps convention of a clockwise box starting at the bottom.
   calculateTiles() {
     this.tiles = t.tilesInBbox(this.getBbox(), this.zoom);
-    console.log("tiles:", this.tiles);
+    //console.log("tiles:", this.tiles);
   }
 
   /*
@@ -109,6 +109,21 @@ export class OpoiService {
       res.map(response => 
         {
           var filtered: Object[] = response["@graph"].filter(res => res["@type"] === type);
+          result = result.concat(filtered);
+        });
+      //console.log("result " + type + ": ", result);
+      return result;
+    });
+  }
+
+  // hashtag: [ "taginfo:tourism=attraction",...]
+  requestTag(tag: string): Promise<Object[]> {
+    var result: Object[] = [];
+    return this.requestTiles().toPromise().then(res => {
+      //console.log(res);
+      res.map(response => 
+        {
+          var filtered: Object[] = response["@graph"].filter(res => res["hasTag"].includes(tag));
           result = result.concat(filtered);
         });
       //console.log("result " + type + ": ", result);
