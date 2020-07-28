@@ -13,6 +13,7 @@
     color:white;
     padding:0;
     margin: 0;
+    transition: all 0.3s ease-in-out;
 }
 
 .cityName {
@@ -30,6 +31,11 @@
     border-radius: 15px 15px 0px 0px;
     padding:10%;
     width: 100px;
+    transition: all 0.5s ease-in-out;
+}
+
+.card:hover{
+  border: 3px solid #8c00ff;
 }
 
 .selected {
