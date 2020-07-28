@@ -7,6 +7,12 @@
 # SerendipityEngine
 Aha! A generator for surprising yet recognizable maps of your neighbourhood
 
+### Map provider used
+#### Mapbox GL JS
+Using Mapbox GL JS we were able to show a map based on the JavaScript library that uses WebGL to render interactive maps from vector tiles and Mapbox styles.
+
+#### Mapbox Studio
+For the map styling we made use of Mapbox Studio. Based on the layers in the style you are able to change the look and feel of the map based on for example their mode of transport.
 
 ### APIs used
 #### Mapbox geocoding
