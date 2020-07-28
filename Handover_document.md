@@ -222,3 +222,9 @@ Having an overview of all types, their @type and maybe @hasTag would be helpfull
 
 - Flickr API not responding with usefull data, see [discussion](https://www.flickr.com/groups/api/discuss/72157715195176202/).
 The plan was to use the Flickr places endpoint to retrieve the popular areas (most pictures taken) and based on that determine areas of interest.
+
+### Future vision / recommendations
+- Backend to store generated maps:  
+There could be a backend that saves the generated maps or the parameters needed to generate the maps, so based on that users can compare their mental map with maps of other users.
+- Solid implementation:
+    - Once available, it would be a great addition if we are able to utilise gps records to know how acquainted the used is with the selected city. Based on prior visits and routes taken there could also be an indication of the interest a user has. To cold start this, the data could be imported from Google Maps Timeline and similar services.
