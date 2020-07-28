@@ -15,6 +15,7 @@ import { MaterialModule } from './material/material.module';
 import { MapComponent } from './map/map.component';
 import { StoreService } from './services/store/store.service';
 import { MapPageComponent } from './pages/map/map.component';
+import { IntroductionComponent } from './pages/introduction/introduction.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MapPageComponent } from './pages/map/map.component';
     CollectionComponent,
     FooterComponent,
     MapComponent,
-    MapPageComponent
+    MapPageComponent,
+    IntroductionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+
+h1 {
+      color : #161616;
+      font-size: 3rem;
+      font-family: "Playfair Display", "serif";
+      font-weight: 600;
+}
+
+video source {
+  margin:0;
+  padding:0;
+  top:0
+}
+

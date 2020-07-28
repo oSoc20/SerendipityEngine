@@ -102,6 +102,7 @@ frequencies = [
     }
     else {
       this.store.selectedDestinationCity = city;
+      this.setHardcoded();
       //console.log(this.store.selectedDestinationCity);
     }
 
@@ -110,15 +111,26 @@ frequencies = [
 
   /* I let this in comment like this you can know how to access the label of the values #Alexis */
   display() {
-    console.log("selectedDestinationCity: ",this.store.selectedDestinationCity.text, "\n",
-                "selectedOriginCity: ", this.store.selectedOriginCity.text, "\n",
-                "selectedTransport: ", this.store.selectedTransport, "\n",
-                "selectedFrequency", this.store.selectedFrequency.value
-    );
+    console.log(this.store.selectedDestinationCity.text);
+    console.log(this.store.selectedOriginCity.text);
+    console.log(this.store.selectedTransport);
+    console.log(this.store.selectedFrequency.value);
   }
 
   getDisplayName(city: any) {
     return city.text + ", " + city.place_name.split(',').pop();
+  }
+
+  setHardcoded() {
+    if (this.store.selectedDestinationCity.text === "Brussels") {
+      this.store.selectedDestinationCity = this.store.brussels;
+    }
+    else if (this.store.selectedDestinationCity.text === "Antwerpen") {
+      this.store.selectedDestinationCity = this.store.antwerp;
+    }
+    else if (this.store.selectedDestinationCity.text === "Gent") {
+      this.store.selectedDestinationCity = this.store.ghent;
+    }
   }
 
 }

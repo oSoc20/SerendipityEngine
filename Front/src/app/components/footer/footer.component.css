@@ -1,7 +1,5 @@
 footer {
     background-color: white;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     display: flex;
     align-items: center;
@@ -9,12 +7,17 @@ footer {
     border-top: 1px solid #63918A;
     padding:2%;
     margin: 0;
+    /* position: absolute;
+    bottom: 0; */
 }
 
 footer img {
-    width: 30px;
+    margin-left:20px;
     height: 30px;
-    margin-left:20px
+}
+
+#imec {
+    height:43px;
 }
 
 footer p {

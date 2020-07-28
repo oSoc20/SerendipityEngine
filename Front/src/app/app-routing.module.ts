@@ -4,16 +4,18 @@ import { HomeComponent } from './pages/home/home.component';
 import { CollectionComponent } from './pages/collection/collection.component';
 import { AboutComponent } from './pages/about/about.component';
 import { MapPageComponent } from './pages/map/map.component';
+import { IntroductionComponent } from './pages/introduction/introduction.component';
+import { MapGuardService } from './services/map-guard.service';
 
 
 const routes: Routes = [
   {
     path:'',
-    component : HomeComponent
+    component : IntroductionComponent
   },
   {
-    path:'collections',
-    component : CollectionComponent
+    path:'engine',
+    component : HomeComponent
   },
   {
     path:'about',
@@ -21,7 +23,8 @@ const routes: Routes = [
   },
   {
     path:'map',
-    component : MapPageComponent
+    component : MapPageComponent,
+    canActivate : [MapGuardService]
   }
 ];
 
