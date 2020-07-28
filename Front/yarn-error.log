@@ -1,0 +1,90 @@
+Arguments: 
+  /usr/local/bin/node /Users/louisheeren/.yarn/bin/yarn.js
+
+PATH: 
+  /Users/louisheeren/.yarn/bin:/Users/louisheeren/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/louisheeren/.yarn/bin:/Users/louisheeren/.config/yarn/global/node_modules/.bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  14.5.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@angular/compiler/-/compiler-8.2.14.tgz: unexpected end of file
+      at Zlib.zlibOnError [as onerror] (zlib.js:183:17)
+
+npm manifest: 
+  {
+    "name": "serendipity-front",
+    "version": "0.0.0",
+    "scripts": {
+      "ng": "ng",
+      "start": "ng serve",
+      "build": "ng build",
+      "test": "ng test",
+      "lint": "ng lint",
+      "e2e": "ng e2e"
+    },
+    "private": true,
+    "dependencies": {
+      "@angular/animations": "~8.2.14",
+      "@angular/cdk": "~8.2.3",
+      "@angular/common": "~8.2.14",
+      "@angular/compiler": "~8.2.14",
+      "@angular/core": "~8.2.14",
+      "@angular/forms": "~8.2.14",
+      "@angular/material": "^8.2.3",
+      "@angular/platform-browser": "~8.2.14",
+      "@angular/platform-browser-dynamic": "~8.2.14",
+      "@angular/router": "~8.2.14",
+      "@types/mapbox-gl": "^1.11.1",
+      "angular-cli-ghpages": "^0.6.2",
+      "angular-mapbox": "^0.2.2",
+      "bootstrap": "^4.5.0",
+      "convert-pdf-png": "0.0.1",
+      "hammerjs": "^2.0.8",
+      "html2canvas": "^1.0.0-rc.5",
+      "jquery": "^3.5.1",
+      "jspdf": "^1.5.3",
+      "leaflet": "^1.6.0",
+      "mapbox-gl": "^1.11.1",
+      "ol": "^6.3.1",
+      "pdf-image": "^2.0.0",
+      "pdf2pic": "^1.4.0",
+      "rxjs": "~6.4.0",
+      "tiles-in-bbox": "^1.0.2",
+      "tslib": "^1.10.0",
+      "zone.js": "~0.9.1"
+    },
+    "devDependencies": {
+      "@angular-devkit/build-angular": "~0.803.19",
+      "@angular/cli": "~8.3.19",
+      "@angular/compiler-cli": "~8.2.14",
+      "@angular/language-service": "~8.2.14",
+      "@types/node": "~8.9.4",
+      "@types/jasmine": "~3.3.8",
+      "@types/jasminewd2": "~2.0.3",
+      "codelyzer": "^5.0.0",
+      "jasmine-core": "~3.4.0",
+      "jasmine-spec-reporter": "~4.2.1",
+      "karma": "~4.1.0",
+      "karma-chrome-launcher": "~2.2.0",
+      "karma-coverage-istanbul-reporter": "~2.0.1",
+      "karma-jasmine": "~2.0.1",
+      "karma-jasmine-html-reporter": "^1.4.0",
+      "protractor": "~5.4.0",
+      "ts-node": "~7.0.0",
+      "tslint": "~5.15.0",
+      "typescript": "~3.5.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
