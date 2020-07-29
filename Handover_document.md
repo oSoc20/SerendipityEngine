@@ -235,3 +235,5 @@ There could be a backend that saves the generated maps or the parameters needed 
 - Solid implementation:
     - Once available, it would be a great addition if we are able to utilise gps records to know how acquainted the used is with the selected city. Based on prior visits and routes taken there could also be an indication of the interest a user has. To cold start this, the data could be imported from Google Maps Timeline and similar services.
     - Based on your contacts and their preferences your user profile could get better predicted when you don't own much data (could help overcome cold start problem).
+- Implementing a spread factor:  
+Adding a method that could pick from the list of the suggested places with an optimal spread could allow for a balanced map. This can also overcome the clustering of markers on the map and make sure they don't overlap.
