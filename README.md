@@ -15,8 +15,13 @@ $ npm install -g angular-cli-ghpages
 $ git checkout gh-pages
 
 $ git push origin gh-pages
-
+___
+A) deploy on gh pages to https://osoc20.github.io/SerendipityEngine/ without custom url
 $ ng build --prod --base-href https://osoc20.github.io/SerendipityEngine/
 
 $ ngh --dir=dist/SerendipityFront
+___
+B) deploy on gh pages to https://mymentalmap.be with custom url
+
+$ ng deploy --cname=mymentalmap.be
 ```
