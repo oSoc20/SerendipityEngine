@@ -1,6 +1,6 @@
 <p align="center">
     <br>
-    <img src="https://github.com/oSoc20/SerendipityEngine/blob/master/img/serendipity-engine_AHA-01.svg" alt="Serendipity Engine Crest" width="200"/>
+    <img src="https://github.com/oSoc20/SerendipityEngine/blob/master/assets/serendipity-engine_AHA-01.svg" alt="Serendipity Engine Crest" width="200"/>
     <br>
 <p>
 <p align="center"><b>Serendipity Engine</b></p>
