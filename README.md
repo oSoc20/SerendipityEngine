@@ -3,6 +3,12 @@
     <img src="https://github.com/oSoc20/SerendipityEngine/blob/master/img/serendipity-engine_AHA-01.svg" alt="Serendipity Engine Crest" width="200"/>
     <br>
 <p>
+<p align="center"><b>Serendipity Engine</b></p>
+<p align="center">
+<a href="https://mit-license.org/"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square"/></a>
+<a href="https://github.com/oSoc20/SerendipityEngine/releases"><img src="https://img.shields.io/badge/Version-0.1.0-blue.svg?style=flat-square"/></a>
+</p>
+<p align="center">Serendipity Engine is a web application you can use to generate <a href="https://mymentalmap.be/">your mental map</a> of a city.<p>
 
 # SerendipityEngine
 Aha! A generator for surprising yet recognizable maps of your neighbourhood
